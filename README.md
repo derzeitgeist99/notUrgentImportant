@@ -34,6 +34,5 @@ So instead of logging into Twitter when you have that spare 5minutes, you can ge
   - Delete Task
   - Create new task
 - Only signed in users allowed (obv), they see only their own content
-- use 2 color palettes
+- use 3 color palettes to chose from in settings
 - use context somehow...
-
