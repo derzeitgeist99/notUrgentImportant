@@ -1,22 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { StyledContainer } from "../Styled/StyledContainer";
+import { StyledContainer, StyledTask } from "../Styled/StyledTaskList";
+import { Clean } from "../Styled/theme";
 
 export default function TaskList() {
     const dummydata = ["Clean House", "Sell Car", "Call Babi", "Shave"]
-
+    const [taskColors, setTaskColors] = useState([])
     const [tasks, setTasks] = useState([])
 
     useEffect(() => {
         setTasks(dummydata)
-        console.log(tasks);
+        setTaskColors(Clean.colors)
 
     }, [])
 
 
     return (
         <StyledContainer>
-            {tasks.map((task) => (
-                <div className="">{task}</div>
+            {tasks.map((task, index) => (
+
+                <StyledTask className="" key={index} style={{ "backgroundColor": taskColors[index] }}>{task}</StyledTask>
             ))}
         </StyledContainer>
     )

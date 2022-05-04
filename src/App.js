@@ -2,16 +2,15 @@ import './App.css';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import UpdateList from './Pages/UpdateList';
 import TaskList from "./Pages/TaskList"
+import { GlobalStyle } from './Styled/GlobalStyle';
+import Navbar from './Components/Navbar';
 
 function App() {
   return (
 
     <BrowserRouter>
-      <nav>
-        <Link to="/updatelist">Modify your Tasks </Link>
-        <Link to="/tasklist">See the list </Link>
-
-      </nav>
+      <GlobalStyle />
+      <Navbar />
 
       <Routes>
         <Route path="/" element={<TaskList />} />
