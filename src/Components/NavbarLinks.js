@@ -1,7 +1,12 @@
 import React from "react";
-import { StyledList, StyledNavbarLink } from "../Styled/StyledHamburgerMenu";
+import { StyledList, StyledLoginButton, StyledNavbarLink } from "../Styled/StyledHamburgerMenu";
+import { LoginButton } from "./LoginButton";
+
 
 export function NavbarLinks({ handleClick }) {
+
+
+
     return (
         <StyledList>
             <li>
@@ -13,9 +18,10 @@ export function NavbarLinks({ handleClick }) {
             <li>
                 <StyledNavbarLink to="/settings" onClick={(event) => handleClick(event)}>Settings </StyledNavbarLink>
             </li>
-            <li>
-                Login/logout
-            </li>
+
+            <LoginButton handleClick={handleClick} />
+
+
 
 
         </StyledList>

@@ -19,3 +19,12 @@ grid-row: 1;
 grid-column: 3;
 font-size: 2rem;
 margin: 3px`
+
+export const StyledLoginButton = styled.button`
+background-color: transparent;
+border: none;
+padding: 0;
+cursor: pointer;
+font-size: 1rem;
+
+`

@@ -1,6 +1,7 @@
 import styled from "styled-components"
 
 export const StyledNavbar = styled.nav`
+width: 100%;
 display: grid;
 grid-template-columns: 1fr auto 40px;
 align-items: center;
