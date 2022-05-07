@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { MdOutlineDone, MdCancel } from "react-icons/md"
-import { StyledEditControlsDiv, StyledEditTask, StyledTask, StyledTaskBox } from "../Styled/StyledTaskList";
+import { StyledEditControlsDiv, StyledEditTask, StyledTaskBox } from "../Styled/StyledTaskList";
+import { useTaskData } from "../Context/TaskDataContext";
 
-export default function EditTask({ taskId, defaultText, setIsEdit }) {
+export default function EditTask({ taskIndex, setIsEdit }) {
     const [inputText, setInputText] = useState()
+    const [taskData, setTaskData] = useTaskData()
 
 
 
@@ -14,9 +16,15 @@ export default function EditTask({ taskId, defaultText, setIsEdit }) {
 
     const handleAccept = (event) => {
         event.preventDefault()
-        const payload = { id: taskId, Text: inputText }
-        console.log(payload);
+        // send to Airtable
+        const payload = { ...taskData[taskIndex], Text: inputText }
+        // close the edit mode
         setIsEdit(null)
+        // update Context
+        const newTaskData = taskData
+        newTaskData[taskIndex] = payload
+        setTaskData(newTaskData)
+
     }
 
     const handleCancel = (event) => {
@@ -27,11 +35,11 @@ export default function EditTask({ taskId, defaultText, setIsEdit }) {
     return (
         <div className="">
             <StyledTaskBox>
-                <StyledEditTask defaultValue={defaultText} onChange={(event) => handleChange(event)} />
+                <StyledEditTask defaultValue={taskData[taskIndex].Text} onChange={(event) => handleChange(event)} autoFocus />
                 <StyledEditControlsDiv>
 
-                    <MdOutlineDone onClick={(event) => handleAccept(event)} />
-                    <MdCancel onClick={(event) => handleCancel(event)} />
+                    <MdOutlineDone onClick={(event) => handleAccept(event)} style={{ "color": "green", "cursor": "pointer" }} />
+                    <MdCancel onClick={(event) => handleCancel(event)} style={{ "color": "red", "cursor": "pointer" }} />
                 </StyledEditControlsDiv>
             </StyledTaskBox>
         </div>

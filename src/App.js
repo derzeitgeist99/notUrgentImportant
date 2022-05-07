@@ -6,6 +6,7 @@ import { GlobalStyle } from './Styled/GlobalStyle';
 import Navbar from './Components/Navbar';
 import { Main } from './Styled/main';
 
+
 function App() {
   console.log(process.env.AUTH0_DOMAIN);
   return (
@@ -13,8 +14,7 @@ function App() {
     <BrowserRouter>
       <GlobalStyle />
       <Main>
-      <Navbar />
-
+        <Navbar />
       <Routes>
         <Route path="/" element={<TaskList />} />
         <Route path="/updatelist" element={<UpdateList />} />

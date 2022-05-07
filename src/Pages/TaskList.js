@@ -1,26 +1,31 @@
 import React, { useEffect, useState } from "react";
+import { useTaskData } from "../Context/TaskDataContext";
 import { StyledContainer, StyledTask, StyledTaskBox } from "../Styled/StyledTaskList";
-import { Clean } from "../Styled/theme";
+
 
 export default function TaskList() {
-    const dummydata = ["Clean House", "Sell Car", "Call Babi", "Shave"]
-    const [taskColors, setTaskColors] = useState([])
-    const [tasks, setTasks] = useState([])
+    const dummydata = [
+        { id: 656565, "Text": "Clean House", Tag: 0 },
+        { id: 2, "Text": "Sell Car", Tag: 1 },
+        { id: 3, "Text": "Call Babi", Tag: 3 },
+        { id: 4, "Text": "Shave", Tag: 3 }]
+    const userSettings = { palette: "clean" }
+
+    const [tasks, setTasks] = useTaskData(dummydata)
 
     useEffect(() => {
         setTasks(dummydata)
-        setTaskColors(Clean.colors)
-
     }, [])
 
 
     return (
         <StyledContainer>
-            {tasks.map((task, index) => (
-                <StyledTaskBox>
+            {tasks.map((task) => (
+                <StyledTaskBox key={task.id}>
 
-
-                <StyledTask className="" key={index} style={{ "backgroundColor": taskColors[index] }}>{task}</StyledTask>
+                    <StyledTask
+                        taskColor={task.Tag}
+                        palette={userSettings.palette} >{task.Text}</StyledTask>
                 </StyledTaskBox>
             ))}
         </StyledContainer>

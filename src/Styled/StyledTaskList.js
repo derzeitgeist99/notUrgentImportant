@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { palette } from "./theme";
+
 
 export const StyledContainer = styled.div`
 margin: auto;
@@ -13,6 +15,7 @@ grid-template-rows: auto;
 export const StyledTask = styled.div`
 margin: 0.0rem;
 grid-area: 1 / 1 / 2 / 3;
+background-color: ${props => palette[props.palette][props.taskColor]};
 `
 
 export const StyledEditTask = styled.input`

@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Auth0Provider } from '@auth0/auth0-react';
 import autho0Config from "./auth0config.json"
+import { TaskDataProvider } from './Context/TaskDataContext';
 
 
 
@@ -15,7 +16,9 @@ root.render(
       domain={autho0Config.domain}
       clientId={autho0Config.clientId}
       redirectUri={window.location.origin}>
+      <TaskDataProvider>
     <App />
+      </TaskDataProvider>
     </Auth0Provider>
   </React.StrictMode>
 
