@@ -15,7 +15,8 @@ root.render(
     <Auth0Provider
       domain={autho0Config.domain}
       clientId={autho0Config.clientId}
-      redirectUri={window.location.origin}>
+      redirectUri={window.location.origin}
+      audience={autho0Config.audience}>
       <TaskDataProvider>
     <App />
       </TaskDataProvider>

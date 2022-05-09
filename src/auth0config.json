@@ -1,4 +1,5 @@
 {
     "domain": "yit.eu.auth0.com",
-    "clientId": "5cWcK8loqhItdWAemms2CxfoWJDY6Mvv"
+    "clientId": "5cWcK8loqhItdWAemms2CxfoWJDY6Mvv",
+    "audience": "https://yit"
 }

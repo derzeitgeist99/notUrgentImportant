@@ -4,7 +4,7 @@ import { useTaskData } from "../Context/TaskDataContext";
 import { palette } from "../Styled/theme"
 
 
-export function TagIcons({ taskIndex, tagColor, tagIndex, renderCounter, setRenderCounter }) {
+export function TagIcons({ taskIndex, renderCounter, setRenderCounter }) {
     const [taskData, setTaskData] = useTaskData()
     // This has to be centrally controlled
     const [availableTags] = useState([0, 1, 2, 3])
@@ -20,13 +20,13 @@ export function TagIcons({ taskIndex, tagColor, tagIndex, renderCounter, setRend
     const handleClick = (event) => {
         event.preventDefault()
         // send to Airtable
-        const payload = { ...taskData[taskIndex], Tag: event.currentTarget.dataset.div_id }
+        const payload = { ...taskData[taskIndex], tag: event.currentTarget.dataset.div_id }
         //update Context
         const newTaskData = taskData
         newTaskData[taskIndex] = payload
         setTaskData(newTaskData)
         // Workaround for renderint the UpdateList js. see more notes there
-        setRenderCounter(renderCounter += 1)
+        setRenderCounter(renderCounter + 1)
     }
 
 
