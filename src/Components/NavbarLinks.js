@@ -9,6 +9,7 @@ export function NavbarLinks({ handleClick }) {
 
     return (
         <StyledList>
+
             <li>
                 <StyledNavbarLink to="/tasklist" onClick={(event) => handleClick(event)}>See the list </StyledNavbarLink>
             </li>

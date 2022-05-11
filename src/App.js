@@ -8,7 +8,6 @@ import { Main } from './Styled/main';
 
 
 function App() {
-  console.log(process.env.AUTH0_DOMAIN);
   return (
 
     <BrowserRouter>

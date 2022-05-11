@@ -3,28 +3,39 @@ import { MdOutlineDone, MdCancel } from "react-icons/md"
 import { FaRocket } from "react-icons/fa"
 import { StyledEditControlsDiv, StyledEditTask, StyledTaskBox } from "../Styled/StyledTaskList";
 import { useTaskData } from "../Context/TaskDataContext";
+import useTaskListData from "../hooks/useTaskListData";
+import { useAuth0 } from "@auth0/auth0-react";
+import { myFetch } from "../helperFunctions/fetch";
 
-export default function EditTask({ taskIndex, setIsEdit }) {
-    const [inputText, setInputText] = useState()
-    const [taskData, setTaskData] = useTaskData()
+export default function EditTask({ taskKey, setIsEdit, defaultValue }) {
+    const [inputText, setInputText] = useState(defaultValue)
+    const [taskListData, downloadTaskListData] = useTaskListData()
+    const { isAuthenticated, getAccessTokenSilently, user } = useAuth0();
 
 
 
     const handleChange = (event) => {
         event.preventDefault()
         setInputText(event.target.value)
+        console.log("here");
+
     }
 
-    const handleAccept = (event) => {
+    const handleAccept = async (event) => {
         event.preventDefault()
         // send to Airtable
-        const payload = { ...taskData[taskIndex], taskDescription: inputText }
-        // close the edit mode
-        setIsEdit(null)
-        // update Context
-        const newTaskData = taskData
-        newTaskData[taskIndex] = payload
-        setTaskData(newTaskData)
+        const token = await getAccessTokenSilently()
+        const payload = {
+            "taskId": taskKey,
+            "taskDescription": inputText,
+        }
+        const data = await myFetch("POST", token, "updateTask", payload)
+        // // close the edit mode
+        // setIsEdit(null)
+        // // update Context
+        // const newTaskData = taskData
+        // newTaskData[taskIndex] = payload
+        // setTaskData(newTaskData)
 
     }
 
@@ -35,17 +46,18 @@ export default function EditTask({ taskIndex, setIsEdit }) {
 
     const createNewTask = (event) => {
         event.preventDefault()
-        const payload = { taskDescription: inputText, tag: 1 }
-        console.log(payload);
-        setIsEdit(null)
-
+        // const payload = { taskDescription: inputText, tag: 1 }
+        // console.log(payload);
+        // setIsEdit(null)
 
 
     }
     return (
         <div className="">
             <StyledTaskBox>
-                <StyledEditTask defaultValue={taskData[taskIndex].taskDescription} onChange={(event) => handleChange(event)} autoFocus />
+                <StyledEditTask
+                    defaultValue={defaultValue}
+                    onChange={(event) => handleChange(event)} autoFocus />
                 <StyledEditControlsDiv>
 
                     <MdOutlineDone onClick={(event) => handleAccept(event)} style={{ "color": "green", "cursor": "pointer" }} />

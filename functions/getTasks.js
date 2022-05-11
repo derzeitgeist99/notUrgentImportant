@@ -1,33 +1,18 @@
-const { configureAirtableTable, getTasksByUserId } = require("./Utils/AirtableUtils")
-const { getAccessTokenFromHeaders, validateAccessToken } = require("./Utils/auth")
+const { getFormattedTasksByUserId } = require("./Utils/AirtableUtils")
+
+const { authorizeRequest } = require("./Utils/eventCheck")
 
 exports.handler = async (event) => {
 
-
-
-    token = getAccessTokenFromHeaders(event.headers)
-    const user = await validateAccessToken(token)
-
-    if (!user) {
-        return ({ statusCode: 403, body: "Not authorized" })
+    const user = await authorizeRequest(event, "GET")
+    if (!user.sub) {
+        return user
     }
-
-    // check if request is GET
-    if (event.httpMethod != "GET") {
-        return ({ statusCode: 405, body: "Bad Requst, must be GET" })
-    }
-    // // check if request contains data (name and score)
-    // console.log(event.body);
-    // body = JSON.parse(event.body)
-    // if (typeof body.userId === "undefined") {
-    //     return ({ statusCode: 405, body: "Bad Requst,missing data" })
-    // }
 
     try {
+        console.log(user);
 
-        const table = await configureAirtableTable(process.env.AIRTABLE_TASKS_TABLE)
-        formattedRecords = await getTasksByUserId(user.sub, table)
-
+        formattedRecords = await getFormattedTasksByUserId(user.sub)
 
         return (
             {
