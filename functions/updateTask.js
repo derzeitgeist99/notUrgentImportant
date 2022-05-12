@@ -1,4 +1,4 @@
-const { configureAirtableTable, getTasksByUserId } = require("./Utils/AirtableUtils")
+const { configureAirtableTable, getTasksByUserId, updateTask } = require("./Utils/AirtableUtils")
 const { authorizeRequest } = require("./Utils/eventCheck")
 
 exports.handler = async (event) => {
@@ -11,18 +11,19 @@ exports.handler = async (event) => {
     // check if request contains data
     const body = JSON.parse(event.body)
 
-    if (typeof body.taskId === "undefined" || typeof body.taskDescription === "undefined") {
+    if (typeof body.id === "undefined" || typeof body.fields === "undefined") {
         return ({ statusCode: 405, body: "Bad Requst,missing data" })
     }
 
 
 
     try {
-        //const table = await configureAirtableTable(process.env.AIRTABLE_TASKS_TABLE)
+        const result = await updateTask(body)
+        console.log(result);
         return (
             {
                 statusCode: 200,
-                body: JSON.stringify("Data Sent")
+                body: JSON.stringify(result)
             }
         )
 

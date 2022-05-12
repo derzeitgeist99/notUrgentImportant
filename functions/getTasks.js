@@ -10,7 +10,7 @@ exports.handler = async (event) => {
     }
 
     try {
-        console.log(user);
+
 
         formattedRecords = await getFormattedTasksByUserId(user.sub)
 

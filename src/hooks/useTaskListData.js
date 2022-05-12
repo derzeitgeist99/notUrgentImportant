@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 import { myFetch } from '../helperFunctions/fetch';
 
@@ -12,16 +12,25 @@ export default () => {
     }
     const [taskListData, setTaskListData] = useState([])
 
-
-
     useEffect(() => {
         const init = async () => {
             const result = await downloadTaskListData()
             console.log("Calling from useEffect");
+            console.log(taskListData);
         }
         init()
     }, [])
-    return [taskListData, downloadTaskListData]
+
+    const updateIncrementallyTaskListdata = (newEntry) => {
+        const taskKey = Object.keys(newEntry)[0]
+        console.log(taskKey);
+        const newTaskList = taskListData
+        newTaskList[taskKey] = newEntry[taskKey]
+        setTaskListData(newTaskList)
+        console.log("updateIncrementallyTaskListdata", taskListData);
+    }
+
+    return [taskListData, downloadTaskListData, setTaskListData, updateIncrementallyTaskListdata]
 
 
 

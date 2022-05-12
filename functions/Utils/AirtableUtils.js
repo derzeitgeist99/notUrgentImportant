@@ -13,16 +13,7 @@ const configureAirtableTable = (tableId) => {
     return table
 }
 
-const getFormattedTasksByUserId = async (userId) => {
-
-    table = configureAirtableTable(process.env.AIRTABLE_TASKS_TABLE)
-
-
-    query = {
-        filterByFormula: `AND({userId} = "${userId}", {taskDescription} != '') `
-    }
-    result = await table.select(query).firstPage()
-
+const formatResults = (result) => {
     const formattedResults = {}
     result.map(record => {
         const fields = record.fields
@@ -30,13 +21,38 @@ const getFormattedTasksByUserId = async (userId) => {
         formattedResults[record.id] = fields
     }
     )
+    return formattedResults
+
+}
+
+const getFormattedTasksByUserId = async (userId) => {
+
+    const table = configureAirtableTable(process.env.AIRTABLE_TASKS_TABLE)
+
+    query = {
+        filterByFormula: `AND({userId} = "${userId}", {taskDescription} != '') `
+    }
+    result = await table.select(query).firstPage()
+    formattedResults = formatResults(result)
     console.log("Called Airtable: getTasksByUserId");
     return formattedResults
+}
+
+const updateTask = async (payload) => {
+    const table = configureAirtableTable(process.env.AIRTABLE_TASKS_TABLE)
+
+    result = await table.update([payload])
+    formattedResults = formatResults(result)
+    console.log("Called Airtable: updateTask");
+    return formattedResults
+
+
 }
 
 
 
 module.exports = {
     configureAirtableTable,
-    getFormattedTasksByUserId
+    getFormattedTasksByUserId,
+    updateTask
 }

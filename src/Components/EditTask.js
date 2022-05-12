@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { MdOutlineDone, MdCancel } from "react-icons/md"
-import { FaRocket } from "react-icons/fa"
 import { StyledEditControlsDiv, StyledEditTask, StyledTaskBox } from "../Styled/StyledTaskList";
-import { useTaskData } from "../Context/TaskDataContext";
 import useTaskListData from "../hooks/useTaskListData";
 import { useAuth0 } from "@auth0/auth0-react";
 import { myFetch } from "../helperFunctions/fetch";
+// Icons
+import { MdOutlineDone, MdCancel } from "react-icons/md"
+import { FaRocket } from "react-icons/fa"
 
-export default function EditTask({ taskKey, setIsEdit, defaultValue }) {
+export default function EditTask({ taskKey, setIsEdit, defaultValue, setTaskListData, updateIncrementallyTaskListdata }) {
     const [inputText, setInputText] = useState(defaultValue)
-    const [taskListData, downloadTaskListData] = useTaskListData()
+    // const [taskListData, downloadTaskListData] = useTaskListData()
     const { isAuthenticated, getAccessTokenSilently, user } = useAuth0();
 
 
@@ -17,8 +17,6 @@ export default function EditTask({ taskKey, setIsEdit, defaultValue }) {
     const handleChange = (event) => {
         event.preventDefault()
         setInputText(event.target.value)
-        console.log("here");
-
     }
 
     const handleAccept = async (event) => {
@@ -26,12 +24,17 @@ export default function EditTask({ taskKey, setIsEdit, defaultValue }) {
         // send to Airtable
         const token = await getAccessTokenSilently()
         const payload = {
-            "taskId": taskKey,
-            "taskDescription": inputText,
+            "id": taskKey,
+            "fields": {
+                "taskDescription": inputText,
+            }
         }
         const data = await myFetch("POST", token, "updateTask", payload)
+        updateIncrementallyTaskListdata(data)
+
+
         // // close the edit mode
-        // setIsEdit(null)
+        setIsEdit(null)
         // // update Context
         // const newTaskData = taskData
         // newTaskData[taskIndex] = payload

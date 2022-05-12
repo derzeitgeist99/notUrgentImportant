@@ -11,7 +11,7 @@ import useTaskListData from "../hooks/useTaskListData";
 export default function UpdateTaskList() {
 
     const { isAuthenticated, getAccessTokenSilently, user } = useAuth0();
-    const [taskListData, downloadTaskListData] = useTaskListData([])
+    const [taskListData, downloadTaskListData, setTaskListData, updateIncrementallyTaskListdata] = useTaskListData([])
 
     const userSettings = { palette: "clean" }
     const [isEdit, setIsEdit] = useState(null)
@@ -55,6 +55,7 @@ export default function UpdateTaskList() {
                         <EditTask
                             taskKey={taskKey}
                             defaultValue={taskListData[taskKey].taskDescription}
+                            updateIncrementallyTaskListdata={updateIncrementallyTaskListdata}
                             setIsEdit={setIsEdit} />}
                 </div>
             ))}

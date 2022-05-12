@@ -8,6 +8,7 @@ import { Main } from './Styled/main';
 
 
 function App() {
+
   return (
 
     <BrowserRouter>
@@ -16,7 +17,7 @@ function App() {
         <Navbar />
       <Routes>
         <Route path="/" element={<TaskList />} />
-        <Route path="/updatelist" element={<UpdateList />} />
+          <Route path="/updatelist" element={<UpdateList />} />
         <Route path="/tasklist" element={<TaskList />} />
       </Routes>
       </Main>
