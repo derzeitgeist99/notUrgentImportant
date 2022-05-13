@@ -17,12 +17,6 @@ export default function UpdateTaskList() {
     const [isEdit, setIsEdit] = useState(null)
 
 
-    //This is silly, but I cannot get the color to change after TagIcon change
-    // The context is changing, but this component is not registering the change
-    // works with editTask component
-    const [renderCounter, setRenderCounter] = useState(0)
-
-
     const handleEditButton = (event, taskId) => {
         event.preventDefault()
         setIsEdit(taskId)
@@ -32,8 +26,7 @@ export default function UpdateTaskList() {
         event.preventDefault()
         const newTaskData = taskListData
         newTaskData.splice(index, 1)
-        //setTasks(newTaskData)
-        setRenderCounter(renderCounter + 1)
+
     }
 
     if (taskListData.length === 0) {

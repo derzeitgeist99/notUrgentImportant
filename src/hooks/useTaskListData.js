@@ -21,6 +21,7 @@ export default () => {
         init()
     }, [])
 
+    // Updates with data already
     const updateIncrementallyTaskListdata = (newEntry) => {
         const taskKey = Object.keys(newEntry)[0]
         console.log(taskKey);
@@ -31,7 +32,5 @@ export default () => {
     }
 
     return [taskListData, downloadTaskListData, setTaskListData, updateIncrementallyTaskListdata]
-
-
 
 }

@@ -38,12 +38,19 @@ const getFormattedTasksByUserId = async (userId) => {
     return formattedResults
 }
 
-const updateTask = async (payload) => {
+const updateTask = async (payload, action) => {
     const table = configureAirtableTable(process.env.AIRTABLE_TASKS_TABLE)
+    console.log("action", action);
 
-    result = await table.update([payload])
+    if (action === "update") {
+        result = await table.update([payload])
+    } else if (action === "create") {
+        console.log("here");
+        result = await table.create([payload])
+    }
+
     formattedResults = formatResults(result)
-    console.log("Called Airtable: updateTask");
+    console.log(`Called Airtable: ${action} Task`);
     return formattedResults
 
 

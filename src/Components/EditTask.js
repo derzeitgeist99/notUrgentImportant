@@ -22,23 +22,42 @@ export default function EditTask({ taskKey, setIsEdit, defaultValue, setTaskList
     const handleAccept = async (event) => {
         event.preventDefault()
         // send to Airtable
+        const action = event.currentTarget.dataset.action
+        console.log(event.currentTarget.dataset.action);
         const token = await getAccessTokenSilently()
-        const payload = {
-            "id": taskKey,
-            "fields": {
-                "taskDescription": inputText,
+        let data = {}
+
+        if (action === "update") { 
+            const payload = {
+                "id": taskKey,
+                "fields": {
+                    "taskDescription": inputText,
+                },
+                "action": action
             }
+            data = await myFetch("POST", token, "updateTask", payload)
+            console.log(data);
+        } else if (action === "create") {
+            const payload = {
+                "fields": {
+                    "taskDescription": inputText,
+                    "tag": 1
+                },
+                "action": action
+            }
+            data = await myFetch("POST", token, "updateTask", payload)
         }
-        const data = await myFetch("POST", token, "updateTask", payload)
+
+
+        // wait until data is updated
+        // then use the returned value
+        // to incrementally update state
         updateIncrementallyTaskListdata(data)
+        // if airtable fails, then the edit mode does not close
+        // deserves better error handling
 
-
-        // // close the edit mode
+        // close the edit mode
         setIsEdit(null)
-        // // update Context
-        // const newTaskData = taskData
-        // newTaskData[taskIndex] = payload
-        // setTaskData(newTaskData)
 
     }
 
@@ -63,9 +82,9 @@ export default function EditTask({ taskKey, setIsEdit, defaultValue, setTaskList
                     onChange={(event) => handleChange(event)} autoFocus />
                 <StyledEditControlsDiv>
 
-                    <MdOutlineDone onClick={(event) => handleAccept(event)} style={{ "color": "green", "cursor": "pointer" }} />
+                    <MdOutlineDone onClick={(event) => handleAccept(event)} style={{ "color": "green", "cursor": "pointer" }} data-action="update" />
                     <MdCancel onClick={(event) => handleCancel(event)} style={{ "color": "red", "cursor": "pointer" }} />
-                    <FaRocket onClick={(event) => createNewTask(event)} style={{ "color": "darkblue", "cursor": "pointer" }} />
+                    <FaRocket onClick={(event) => handleAccept(event)} style={{ "color": "darkblue", "cursor": "pointer" }} data-action="create" />
                 </StyledEditControlsDiv>
             </StyledTaskBox>
         </div>
