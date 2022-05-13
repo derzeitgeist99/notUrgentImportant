@@ -21,12 +21,21 @@ export default () => {
         init()
     }, [])
 
-    // Updates with data already
-    const updateIncrementallyTaskListdata = (newEntry) => {
+    // Updates with data already in state
+    const updateIncrementallyTaskListdata = (newEntry, action) => {
         const taskKey = Object.keys(newEntry)[0]
-        console.log(taskKey);
         const newTaskList = taskListData
-        newTaskList[taskKey] = newEntry[taskKey]
+        switch (action) {
+            case "update":
+                newTaskList[taskKey] = newEntry[taskKey]
+                break
+            case "create":
+                newTaskList[taskKey] = newEntry[taskKey]
+                break
+            case "delete":
+                delete newTaskList[taskKey]
+                break
+        }
         setTaskListData(newTaskList)
         console.log("updateIncrementallyTaskListdata", taskListData);
     }

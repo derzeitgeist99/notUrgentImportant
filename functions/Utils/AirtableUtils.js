@@ -17,12 +17,11 @@ const formatResults = (result) => {
     const formattedResults = {}
     result.map(record => {
         const fields = record.fields
-        fields.taskId = record.id
+        fields.taskKey = record.id
         formattedResults[record.id] = fields
     }
     )
     return formattedResults
-
 }
 
 const getFormattedTasksByUserId = async (userId) => {
@@ -38,15 +37,24 @@ const getFormattedTasksByUserId = async (userId) => {
     return formattedResults
 }
 
-const updateTask = async (payload, action) => {
+const updateTask = async (payload, action, user) => {
     const table = configureAirtableTable(process.env.AIRTABLE_TASKS_TABLE)
     console.log("action", action);
 
-    if (action === "update") {
-        result = await table.update([payload])
-    } else if (action === "create") {
-        console.log("here");
-        result = await table.create([payload])
+    switch (action) {
+        case "update":
+            console.log(payload);
+            result = await table.update([payload])
+            console.log(result);
+            break;
+        case "create":
+            payload.fields.userId = user.sub
+            result = await table.create([payload])
+            break;
+        case "delete":
+            result = await table.destroy([payload["id"]])
+            break;
+
     }
 
     formattedResults = formatResults(result)

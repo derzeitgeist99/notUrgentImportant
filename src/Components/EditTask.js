@@ -6,58 +6,47 @@ import { myFetch } from "../helperFunctions/fetch";
 // Icons
 import { MdOutlineDone, MdCancel } from "react-icons/md"
 import { FaRocket } from "react-icons/fa"
+import { IoTrashBin } from "react-icons/io5"
+import { definePayload } from "../helperFunctions/definePayload";
+import { TagIcons } from "./TagIcons"
 
-export default function EditTask({ taskKey, setIsEdit, defaultValue, setTaskListData, updateIncrementallyTaskListdata }) {
-    const [inputText, setInputText] = useState(defaultValue)
-    // const [taskListData, downloadTaskListData] = useTaskListData()
+export default function EditTask({ taskKey, setIsEdit, defaultValue, defaultTag, updateIncrementallyTaskListdata }) {
+    const [airtableFields, setAirtableFields] = useState({
+        "taskDescription": defaultValue,
+        "tag": defaultTag
+    })
     const { isAuthenticated, getAccessTokenSilently, user } = useAuth0();
 
-
-
-    const handleChange = (event) => {
+    const handleTextBoxChange = (event) => {
         event.preventDefault()
-        setInputText(event.target.value)
+        const newAirtableFields = airtableFields
+        newAirtableFields.taskDescription = event.target.value
+        setAirtableFields(newAirtableFields)
+    }
+
+    const handleTagChange = (event) => {
+        event.preventDefault()
+        const newAirtableFields = airtableFields
+        newAirtableFields.tag = parseInt(event.currentTarget.dataset.tag)
+        setAirtableFields(newAirtableFields)
+        console.log(airtableFields);
     }
 
     const handleAccept = async (event) => {
         event.preventDefault()
-        // send to Airtable
+
         const action = event.currentTarget.dataset.action
-        console.log(event.currentTarget.dataset.action);
         const token = await getAccessTokenSilently()
-        let data = {}
-
-        if (action === "update") { 
-            const payload = {
-                "id": taskKey,
-                "fields": {
-                    "taskDescription": inputText,
-                },
-                "action": action
-            }
-            data = await myFetch("POST", token, "updateTask", payload)
-            console.log(data);
-        } else if (action === "create") {
-            const payload = {
-                "fields": {
-                    "taskDescription": inputText,
-                    "tag": 1
-                },
-                "action": action
-            }
-            data = await myFetch("POST", token, "updateTask", payload)
-        }
-
+        const payload = definePayload(action, taskKey, airtableFields)
 
         // wait until data is updated
-        // then use the returned value
-        // to incrementally update state
-        updateIncrementallyTaskListdata(data)
-        // if airtable fails, then the edit mode does not close
-        // deserves better error handling
+        const data = await myFetch("POST", token, "updateTask", payload)
 
-        // close the edit mode
+        // then use the returned value to incrementally update state
+        updateIncrementallyTaskListdata(data, action)
+        // if airtable fails, then the edit mode does not close
         setIsEdit(null)
+        // deserves better error handling
 
     }
 
@@ -66,25 +55,21 @@ export default function EditTask({ taskKey, setIsEdit, defaultValue, setTaskList
         setIsEdit(null)
     }
 
-    const createNewTask = (event) => {
-        event.preventDefault()
-        // const payload = { taskDescription: inputText, tag: 1 }
-        // console.log(payload);
-        // setIsEdit(null)
 
 
-    }
     return (
         <div className="">
             <StyledTaskBox>
                 <StyledEditTask
                     defaultValue={defaultValue}
-                    onChange={(event) => handleChange(event)} autoFocus />
+                    onChange={(event) => handleTextBoxChange(event)} autoFocus />
                 <StyledEditControlsDiv>
+                    <TagIcons taskIndex={taskKey} handleTagChange={handleTagChange} />
 
                     <MdOutlineDone onClick={(event) => handleAccept(event)} style={{ "color": "green", "cursor": "pointer" }} data-action="update" />
                     <MdCancel onClick={(event) => handleCancel(event)} style={{ "color": "red", "cursor": "pointer" }} />
                     <FaRocket onClick={(event) => handleAccept(event)} style={{ "color": "darkblue", "cursor": "pointer" }} data-action="create" />
+                    <IoTrashBin onClick={(event) => handleAccept(event)} style={{ "color": "darkblue", "cursor": "pointer" }} data-action="delete" />
                 </StyledEditControlsDiv>
             </StyledTaskBox>
         </div>

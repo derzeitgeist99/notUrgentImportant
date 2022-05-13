@@ -17,17 +17,12 @@ export default function UpdateTaskList() {
     const [isEdit, setIsEdit] = useState(null)
 
 
-    const handleEditButton = (event, taskId) => {
+    const handleEditButton = (event, taskKey) => {
         event.preventDefault()
-        setIsEdit(taskId)
+        console.log(taskListData);
+        setIsEdit(taskKey)
     }
 
-    const handleDelete = (event, index) => {
-        event.preventDefault()
-        const newTaskData = taskListData
-        newTaskData.splice(index, 1)
-
-    }
 
     if (taskListData.length === 0) {
         return (<p>no tasks. log in or create new</p>)
@@ -48,6 +43,7 @@ export default function UpdateTaskList() {
                         <EditTask
                             taskKey={taskKey}
                             defaultValue={taskListData[taskKey].taskDescription}
+                            defaultTag={taskListData[taskKey].tag}
                             updateIncrementallyTaskListdata={updateIncrementallyTaskListdata}
                             setIsEdit={setIsEdit} />}
                 </div>

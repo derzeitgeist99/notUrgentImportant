@@ -10,9 +10,9 @@ exports.handler = async (event) => {
 
     // check if request contains data
     const body = JSON.parse(event.body)
-    console.log(body);
 
-    if (typeof body.fields === "undefined" || typeof body.action === "undefined") {
+
+    if (typeof body.action === "undefined") {
         return ({ statusCode: 405, body: "Bad Requst,missing data" })
     }
 
@@ -23,7 +23,7 @@ exports.handler = async (event) => {
 
     try {
 
-        const result = await updateTask(body, action)
+        const result = await updateTask(body, action, user)
         console.log(result);
         return (
             {
