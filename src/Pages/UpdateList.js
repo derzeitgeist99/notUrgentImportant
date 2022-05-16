@@ -1,17 +1,23 @@
 import { TaskBox } from './../Components/TaskBox';
 import React, { useEffect, useState } from "react";
 import EditTask from "../Components/EditTask";
-import { StyledContainer } from "../Styled/StyledTaskList";
+import { StyledContainer, StyledTaskBox } from "../Styled/StyledTaskList";
 
 import { useAuth0 } from "@auth0/auth0-react";
 import useTaskListData from "../hooks/useTaskListData";
+import { FilterBox } from '../Components/FilterBox';
 
 
 
 export default function UpdateTaskList() {
 
     const { isAuthenticated, getAccessTokenSilently, user } = useAuth0();
-    const [taskListData, downloadTaskListData, setTaskListData, updateIncrementallyTaskListdata] = useTaskListData([])
+    const [taskListData,
+        downloadTaskListData,
+        setTaskListData,
+        updateIncrementallyTaskListdata,
+        setFilter]
+        = useTaskListData([])
 
     const userSettings = { palette: "clean" }
     const [isEdit, setIsEdit] = useState(null)
@@ -19,8 +25,9 @@ export default function UpdateTaskList() {
 
     const handleEditButton = (event, taskKey) => {
         event.preventDefault()
-        console.log(taskListData);
         setIsEdit(taskKey)
+        setFilter({ tag: 5 })
+        setFilter({ count: 10 })
     }
 
 
@@ -30,10 +37,15 @@ export default function UpdateTaskList() {
     } 
 
     return (
-
+        <>
+            <FilterBox paletteName={userSettings.palette} />
         <StyledContainer>
             {Object.keys(taskListData).map((taskKey) => (
-                <div className="" key={taskKey}>
+
+                <StyledTaskBox key={taskKey}
+                    taskColor={taskListData[taskKey]["tag"]}
+                    palette={userSettings.palette} >
+
                     {(isEdit !== taskKey) ?
                         <TaskBox
                             task={taskListData[taskKey]}
@@ -46,9 +58,11 @@ export default function UpdateTaskList() {
                             defaultTag={taskListData[taskKey].tag}
                             updateIncrementallyTaskListdata={updateIncrementallyTaskListdata}
                             setIsEdit={setIsEdit} />}
-                </div>
+
+                </StyledTaskBox>
             ))}
 
         </StyledContainer>
+        </>
     )
 }

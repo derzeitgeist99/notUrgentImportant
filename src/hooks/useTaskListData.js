@@ -11,6 +11,7 @@ export default () => {
         console.log("Calling from downloadTaskData");
     }
     const [taskListData, setTaskListData] = useState([])
+    const [taskListFilter, setTaskListfilter] = useState({ tag: null, count: null })
 
     useEffect(() => {
         const init = async () => {
@@ -40,6 +41,15 @@ export default () => {
         console.log("updateIncrementallyTaskListdata", taskListData);
     }
 
-    return [taskListData, downloadTaskListData, setTaskListData, updateIncrementallyTaskListdata]
+    const setFilter = (filter) => {
+        const filterEntries = Object.entries(filter)[0]
+        setTaskListfilter(taskListFilter, taskListFilter[filterEntries[0]] = filterEntries[1])
+    }
+
+    return [taskListData,
+        downloadTaskListData,
+        setTaskListData,
+        updateIncrementallyTaskListdata,
+        setFilter]
 
 }

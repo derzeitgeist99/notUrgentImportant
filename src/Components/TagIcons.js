@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import { FaCircle } from "react-icons/fa"
 import { useTaskData } from "../Context/TaskDataContext";
 import { palette } from "../Styled/theme"
+import { availableTagsList } from "../helperFunctions/availableTags";
 
 
 export function TagIcons({ handleTagChange }) {
     // This has to be centrally controlled
-    const [availableTags] = useState([0, 1, 2, 3])
+    const [availableTags] = useState(availableTagsList)
     // This has to come from context
     const userSettings = { palette: "clean" }
     const [colors, setColors] = useState(palette[userSettings.palette])

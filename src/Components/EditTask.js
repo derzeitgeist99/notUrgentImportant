@@ -19,17 +19,12 @@ export default function EditTask({ taskKey, setIsEdit, defaultValue, defaultTag,
 
     const handleTextBoxChange = (event) => {
         event.preventDefault()
-        const newAirtableFields = airtableFields
-        newAirtableFields.taskDescription = event.target.value
-        setAirtableFields(newAirtableFields)
+        setAirtableFields(airtableFields, airtableFields.taskDescription = event.target.value)
     }
 
     const handleTagChange = (event) => {
         event.preventDefault()
-        const newAirtableFields = airtableFields
-        newAirtableFields.tag = parseInt(event.currentTarget.dataset.tag)
-        setAirtableFields(newAirtableFields)
-        console.log(airtableFields);
+        setAirtableFields(airtableFields, airtableFields.tag = parseInt(event.currentTarget.dataset.tag))
     }
 
     const handleAccept = async (event) => {
@@ -58,8 +53,8 @@ export default function EditTask({ taskKey, setIsEdit, defaultValue, defaultTag,
 
 
     return (
-        <div className="">
-            <StyledTaskBox>
+        <>
+
                 <StyledEditTask
                     defaultValue={defaultValue}
                     onChange={(event) => handleTextBoxChange(event)}
@@ -72,7 +67,7 @@ export default function EditTask({ taskKey, setIsEdit, defaultValue, defaultTag,
                     <FaRocket onClick={(event) => handleAccept(event)} style={{ "color": "darkblue", "cursor": "pointer" }} data-action="create" />
                     <IoTrashBin onClick={(event) => handleAccept(event)} style={{ "color": "darkblue", "cursor": "pointer" }} data-action="delete" />
                 </StyledEditControlsDiv>
-            </StyledTaskBox>
-        </div>
+
+        </>
     )
 } 
