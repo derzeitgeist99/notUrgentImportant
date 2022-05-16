@@ -28,6 +28,7 @@ grid-area: 1 / 1 / 2 / 3;
 border: none;
 font-size: 1rem;
 
+
 `
 
 export const StyledTaskBox = styled.div`

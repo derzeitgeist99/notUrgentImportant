@@ -62,7 +62,8 @@ export default function EditTask({ taskKey, setIsEdit, defaultValue, defaultTag,
             <StyledTaskBox>
                 <StyledEditTask
                     defaultValue={defaultValue}
-                    onChange={(event) => handleTextBoxChange(event)} autoFocus />
+                    onChange={(event) => handleTextBoxChange(event)}
+                    autoFocus />
                 <StyledEditControlsDiv>
                     <TagIcons taskIndex={taskKey} handleTagChange={handleTagChange} />
 
