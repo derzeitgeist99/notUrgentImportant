@@ -6,21 +6,20 @@ export default () => {
     const { isAuthenticated, getAccessTokenSilently, user } = useAuth0();
     const downloadTaskListData = async () => {
         const token = await getAccessTokenSilently()
-        const data = await myFetch("GET", token, "getTasks")
+        const data = await myFetch("POST", token, "getTasks", taskListFilter)
         setTaskListData(data)
         console.log("Calling from downloadTaskData");
     }
     const [taskListData, setTaskListData] = useState([])
-    const [taskListFilter, setTaskListfilter] = useState({ tag: null, count: null })
+    const [taskListFilter, setTaskListfilter] = useState({ tag: false, count: 3, edit: false })
 
     useEffect(() => {
         const init = async () => {
             const result = await downloadTaskListData()
             console.log("Calling from useEffect");
-            console.log(taskListData);
         }
         init()
-    }, [])
+    }, [taskListFilter])
 
     // Updates with data already in state
     const updateIncrementallyTaskListdata = (newEntry, action) => {
@@ -37,6 +36,7 @@ export default () => {
                 delete newTaskList[taskKey]
                 break
         }
+
         setTaskListData(newTaskList)
         console.log("updateIncrementallyTaskListdata", taskListData);
     }
@@ -44,12 +44,19 @@ export default () => {
     const setFilter = (filter) => {
         const filterEntries = Object.entries(filter)[0]
         setTaskListfilter(taskListFilter, taskListFilter[filterEntries[0]] = filterEntries[1])
+        console.log(taskListFilter);
+        downloadTaskListData()
     }
 
-    return [taskListData,
+
+    return {
+        taskListData,
         downloadTaskListData,
         setTaskListData,
         updateIncrementallyTaskListdata,
-        setFilter]
+        setFilter,
+        taskListFilter
+
+    }
 
 }

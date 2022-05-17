@@ -1,18 +1,20 @@
-const { getFormattedTasksByUserId } = require("./Utils/AirtableUtils")
+const { getAndManipulateTasks } = require("./Utils/getAndManipulateTasks")
 
 const { authorizeRequest } = require("./Utils/eventCheck")
 
 exports.handler = async (event) => {
 
-    const user = await authorizeRequest(event, "GET")
+    const user = await authorizeRequest(event, "POST")
     if (!user.sub) {
         return user
     }
 
+    const filter = JSON.parse(event.body)
+
+
     try {
 
-
-        formattedRecords = await getFormattedTasksByUserId(user.sub)
+        formattedRecords = await getAndManipulateTasks(user.sub, filter)
 
         return (
             {

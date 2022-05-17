@@ -12,11 +12,10 @@ import { FilterBox } from '../Components/FilterBox';
 export default function UpdateTaskList() {
 
     const { isAuthenticated, getAccessTokenSilently, user } = useAuth0();
-    const [taskListData,
-        downloadTaskListData,
-        setTaskListData,
+    const { taskListData,
         updateIncrementallyTaskListdata,
-        setFilter]
+        setFilter, taskListFilter
+    }
         = useTaskListData([])
 
     const userSettings = { palette: "clean" }
@@ -26,8 +25,7 @@ export default function UpdateTaskList() {
     const handleEditButton = (event, taskKey) => {
         event.preventDefault()
         setIsEdit(taskKey)
-        setFilter({ tag: 5 })
-        setFilter({ count: 10 })
+
     }
 
 
@@ -38,7 +36,10 @@ export default function UpdateTaskList() {
 
     return (
         <>
-            <FilterBox paletteName={userSettings.palette} />
+            <FilterBox
+                paletteName={userSettings.palette}
+                setFilter={setFilter}
+                taskListFilter={taskListFilter} />
         <StyledContainer>
             {Object.keys(taskListData).map((taskKey) => (
 
@@ -50,6 +51,7 @@ export default function UpdateTaskList() {
                         <TaskBox
                             task={taskListData[taskKey]}
                             handleEditButton={handleEditButton}
+                            showEditDiv={taskListFilter.edit}
                         />
                         :
                         <EditTask

@@ -1,4 +1,4 @@
-const { configureAirtableTable, getTasksByUserId, updateTask } = require("./Utils/AirtableUtils")
+const { updateTaskByCase } = require("./Utils/updateTaskByCase")
 const { authorizeRequest } = require("./Utils/eventCheck")
 
 exports.handler = async (event) => {
@@ -23,7 +23,7 @@ exports.handler = async (event) => {
 
     try {
 
-        const result = await updateTask(body, action, user)
+        const result = await updateTaskByCase(body, action, user)
         console.log(result);
         return (
             {

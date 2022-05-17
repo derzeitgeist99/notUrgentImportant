@@ -4,20 +4,41 @@ import { availableTagsList } from "../helperFunctions/availableTags";
 import { palette } from "../Styled/theme"
 import { AiOutlineEdit } from "react-icons/ai";
 
-export function FilterBox({ paletteName }) {
+export function FilterBox({ paletteName, setFilter, taskListFilter }) {
     const [availableTags] = useState(availableTagsList)
     const [colors] = useState(palette[paletteName])
+
+    const handleFilterPillClick = (event) => {
+        event.preventDefault();
+
+        //Second Click sets Tag back to false so you can see all
+        (parseInt(event.currentTarget.dataset.tag) === taskListFilter.tag) ?
+            setFilter({ tag: false }) :
+            setFilter({ tag: parseInt(event.currentTarget.dataset.tag) });
+
+    }
+
+    const handleEditPillClick = (event) => {
+        event.preventDefault();
+        setFilter({ edit: !taskListFilter.edit, tag: false })
+    }
     return (
 
 
         <StyledFilterContainer>
             {availableTags.map((tag) => (
                 <StyledFilterPill key={tag}
-                    color={colors[tag]}>{tag}</StyledFilterPill>
+                    color={colors[tag]}
+                    data-tag={tag}
+                    onClick={(event) => handleFilterPillClick(event)}
+                    borderStyle={(tag === taskListFilter.tag) ? "solid" : "none"}
+                >{tag}</StyledFilterPill>
             )
             )}
             <StyledFilterPill
-                color={"lightgrey"}>
+                color={"lightgrey"}
+                onClick={(event) => handleEditPillClick(event)}
+                borderStyle={(taskListFilter.edit) ? "solid" : "none"}>
                 <AiOutlineEdit /> Edit
             </StyledFilterPill>
         </StyledFilterContainer>

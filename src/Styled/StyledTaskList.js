@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { palette } from "./theme";
 
-
+//Here
 export const StyledContainer = styled.div`
 margin: auto;
 width: min(80%);
@@ -9,7 +9,14 @@ height: max(100%, 1000px);
 display: flex;
 flex-direction: column;
 justify-content: flex-start;
-grid-template-rows: auto;
+
+`
+export const StyledTaskBox = styled.div`
+height: max(2.5vh, 120px);
+margin: 0.5rem;
+display: grid;
+grid-template-rows: 1fr 15%;
+background-color: ${props => palette[props.palette][props.taskColor]};
 `
 
 export const StyledTask = styled.div`
@@ -18,8 +25,6 @@ grid-area: 1 / 1 / 2 / 3;
 `
 
 export const StyledEditTask = styled.input`
-/* height: 100%;
-width: 100%; */
 margin: 0;
 padding: 0;
 grid-area: 1 / 1 / 2 / 3;
@@ -29,13 +34,6 @@ background-color: inherit;
 
 `
 
-export const StyledTaskBox = styled.div`
-height: max(2.5vh, 100px);
-margin: 0.5rem;
-display: grid;
-grid-template-rows: 1fr 10%;
-background-color: ${props => palette[props.palette][props.taskColor]};
-`
 
 
 export const StyledEditControlsDiv = styled.div`
@@ -45,5 +43,6 @@ padding: 0;
 display: flexbox;
 justify-content: flex-end;
 align-items: center;
+background-color: white;
 
 `
