@@ -27,9 +27,12 @@ export default function UpdateTaskList() {
         setIsEdit(taskKey)
 
     }
+    useEffect(() => {
+        console.log(taskListFilter);
+    }, [])
 
 
-    if (taskListData.length === 0) {
+    if (taskListData.length > 0) {
         return (<p>no tasks. log in or create new</p>)
 
     } 
@@ -41,8 +44,7 @@ export default function UpdateTaskList() {
                 setFilter={setFilter}
                 taskListFilter={taskListFilter} />
         <StyledContainer>
-            {Object.keys(taskListData).map((taskKey) => (
-
+                {Object.keys(taskListData).map((taskKey) => (
                 <StyledTaskBox key={taskKey}
                     taskColor={taskListData[taskKey]["tag"]}
                     palette={userSettings.palette} >

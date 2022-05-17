@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FaCircle } from "react-icons/fa"
 import { useTaskData } from "../Context/TaskDataContext";
 import { palette } from "../Styled/theme"
-import { availableTagsList } from "../helperFunctions/availableTags";
+import { availableTagsList } from "../helperFunctions/availableTags.js"
 
 
 export function TagIcons({ handleTagChange }) {
