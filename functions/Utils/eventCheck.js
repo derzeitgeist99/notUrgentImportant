@@ -2,13 +2,10 @@ const { getAccessTokenFromHeaders, validateAccessToken } = require("./auth")
 const authorizeRequest = async (event, requestType) => {
 
     token = getAccessTokenFromHeaders(event.headers)
-    console.log(token);
     const user = await validateAccessToken(token)
-    console.log(user);
 
 
     if (!user) {
-        console.log("User Failed");
         return ({ statusCode: 403, body: "Not authorized" })
     }
 
