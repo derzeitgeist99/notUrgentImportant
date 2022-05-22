@@ -12,8 +12,10 @@ const updateTaskByCase = async (payload, action, user) => {
             console.log(result);
             break;
         case "create":
+            console.log(payload);
             payload.fields.userId = user.sub
             result = await table.create([payload])
+
             break;
         case "delete":
             result = await table.destroy([payload["id"]])

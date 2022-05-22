@@ -38,7 +38,8 @@ const getAndManipulateTasks = async (userId, filter) => {
     const table = configureAirtableTable(process.env.AIRTABLE_TASKS_TABLE)
 
     //didn't find operator for "any" in Airtable docs. Otherwise would use that.
-    const tagFilter = (!filter.tag) ? "" : `,{tag}=${filter.tag}`
+    const tagFilter = (filter.tag === false) ? "" : `,{tag}=${filter.tag}`
+
 
     const query = {
         filterByFormula: `AND({userId} = "${userId}", {taskDescription} != ''${tagFilter}) `

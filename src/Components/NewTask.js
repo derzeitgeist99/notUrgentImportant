@@ -29,7 +29,7 @@ export function NewTask({ updateIncrementallyTaskListdata, setIsEdit, palette, a
                     >
                         <EditTask
                             defaultValue="your Task goes here"
-                            defaultTag="1"
+                            defaultTag={1}
                             updateIncrementallyTaskListdata={updateIncrementallyTaskListdata}
                             setIsEdit={setIsEdit}
                             action="Create" />

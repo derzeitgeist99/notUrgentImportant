@@ -1,5 +1,5 @@
 export const myFetch = async (method, token, functionName, payload = null) => {
-    const url = "http://localhost:8888/.netlify/functions/"
+    const url = ".netlify/functions/"
     console.log("options");
     const options = {
         method,
