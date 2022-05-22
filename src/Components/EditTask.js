@@ -5,12 +5,12 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { myFetch } from "../helperFunctions/fetch";
 // Icons
 import { MdOutlineDone, MdCancel } from "react-icons/md"
-import { FaRocket } from "react-icons/fa"
+import { HiOutlineDocumentAdd } from "react-icons/hi"
 import { IoTrashBin } from "react-icons/io5"
 import { definePayload } from "../helperFunctions/definePayload";
 import { TagIcons } from "./TagIcons"
 
-export default function EditTask({ taskKey, setIsEdit, defaultValue, defaultTag, updateIncrementallyTaskListdata }) {
+export default function EditTask({ taskKey, setIsEdit, defaultValue, defaultTag, updateIncrementallyTaskListdata, action }) {
     const [airtableFields, setAirtableFields] = useState({
         "taskDescription": defaultValue,
         "tag": defaultTag
@@ -42,12 +42,16 @@ export default function EditTask({ taskKey, setIsEdit, defaultValue, defaultTag,
         // if airtable fails, then the edit mode does not close
         setIsEdit(null)
         // deserves better error handling
+        // if this was called from overlay I want to close it. If not, no impact
+        document.getElementById("NewTaskOverlay").style.display = "none"
 
     }
 
     const handleCancel = (event) => {
         event.preventDefault()
         setIsEdit(null)
+        // if this was called from overlay I want to close it. If not, no impact
+        document.getElementById("NewTaskOverlay").style.display = "none";
     }
 
 
@@ -62,10 +66,10 @@ export default function EditTask({ taskKey, setIsEdit, defaultValue, defaultTag,
                 <StyledEditControlsDiv>
                     <TagIcons taskIndex={taskKey} handleTagChange={handleTagChange} />
 
-                    <MdOutlineDone onClick={(event) => handleAccept(event)} style={{ "color": "green", "cursor": "pointer" }} data-action="update" />
-                    <MdCancel onClick={(event) => handleCancel(event)} style={{ "color": "red", "cursor": "pointer" }} />
-                    <FaRocket onClick={(event) => handleAccept(event)} style={{ "color": "darkblue", "cursor": "pointer" }} data-action="create" />
-                    <IoTrashBin onClick={(event) => handleAccept(event)} style={{ "color": "darkblue", "cursor": "pointer" }} data-action="delete" />
+                {(action === "Update") && <MdOutlineDone onClick={(event) => handleAccept(event)} style={{ "color": "green", "cursor": "pointer" }} data-action="update" />}
+                {(action === "Update") && <IoTrashBin onClick={(event) => handleAccept(event)} style={{ "color": "darkblue", "cursor": "pointer" }} data-action="delete" />}
+                {(action === "Create") && <HiOutlineDocumentAdd onClick={(event) => handleAccept(event)} style={{ "color": "darkblue", "cursor": "pointer" }} data-action="create" />}
+                <MdCancel onClick={(event) => handleCancel(event)} style={{ "color": "red", "cursor": "pointer" }} />
                 </StyledEditControlsDiv>
 
         </>

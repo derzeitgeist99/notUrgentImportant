@@ -3,6 +3,7 @@ import { StyledFilterContainer, StyledFilterPill } from "../Styled/FilterBox";
 import { availableTagsList } from "../helperFunctions/availableTags";
 import { palette } from "../Styled/theme"
 import { AiOutlineEdit } from "react-icons/ai";
+import { HiOutlineDocumentAdd } from "react-icons/hi"
 
 export function FilterBox({ paletteName, setFilter, taskListFilter }) {
     const [availableTags] = useState(availableTagsList)
@@ -22,6 +23,11 @@ export function FilterBox({ paletteName, setFilter, taskListFilter }) {
         event.preventDefault();
         setFilter({ edit: !taskListFilter.edit, tag: false })
     }
+
+    const handleNewTaskPillClick = (event) => {
+        event.preventDefault();
+        document.getElementById("NewTaskOverlay").style.display = "block";
+    }
     return (
 
 
@@ -39,7 +45,13 @@ export function FilterBox({ paletteName, setFilter, taskListFilter }) {
                 color={"lightgrey"}
                 onClick={(event) => handleEditPillClick(event)}
                 borderStyle={(taskListFilter.edit) ? "solid" : "none"}>
-                <AiOutlineEdit /> Edit
+                <AiOutlineEdit />
+            </StyledFilterPill>
+            <StyledFilterPill
+                color={"lightgrey"}
+                onClick={(event) => handleNewTaskPillClick(event)}
+            >
+                <HiOutlineDocumentAdd />
             </StyledFilterPill>
         </StyledFilterContainer>
     )

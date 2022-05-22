@@ -6,6 +6,7 @@ import { StyledContainer, StyledTaskBox } from "../Styled/StyledTaskList";
 import useTaskListData from "../hooks/useTaskListData";
 import { FilterBox } from '../Components/FilterBox';
 import { HandleEmptyList } from '../Components/HandleEmptyList';
+import { NewTask } from '../Components/NewTask';
 
 
 
@@ -57,10 +58,17 @@ export default function UpdateTaskList() {
                             defaultValue={taskListData[taskKey].taskDescription}
                             defaultTag={taskListData[taskKey].tag}
                             updateIncrementallyTaskListdata={updateIncrementallyTaskListdata}
-                            setIsEdit={setIsEdit} />}
+                                setIsEdit={setIsEdit}
+                                action="Update" />}
 
                 </StyledTaskBox>
             ))}
+
+                <NewTask
+                    updateIncrementallyTaskListdata={updateIncrementallyTaskListdata}
+                    setIsEdit={setIsEdit}
+                    palette={userSettings.palette}
+                    action="Create" />
 
         </StyledContainer>
         </>
