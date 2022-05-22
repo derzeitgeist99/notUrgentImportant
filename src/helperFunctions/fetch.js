@@ -11,6 +11,7 @@ export const myFetch = async (method, token, functionName, payload = null) => {
     console.log(options.body);
 
     const result = await fetch(`${url}${functionName}`, options)
+    console.log("Fetch:", `${url}${functionName}`, options);
     const data = await result.json()
     return data
 

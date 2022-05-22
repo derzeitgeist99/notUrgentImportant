@@ -13,7 +13,7 @@ export function LoginButton({ handleClick }) {
     }
 
     const loginOutAndCloseDiv = (event) => {
-        logout()
+        logout({ returnTo: window.location.origin })
         handleClick(event)
     }
 
