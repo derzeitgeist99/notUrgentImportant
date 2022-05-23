@@ -10,7 +10,8 @@ export default () => {
         setTaskListData(data)
     }
     const [taskListData, setTaskListData] = useState([])
-    const [taskListFilter, setTaskListfilter] = useState({ tag: false, count: 3, edit: false })
+    const numberOfTasks = (window.localStorage.numberOfTasks >= 1) ? window.localStorage.numberOfTasks : 3
+    const [taskListFilter, setTaskListfilter] = useState({ tag: false, count: numberOfTasks, edit: false })
 
     useEffect(() => {
         const init = async () => {

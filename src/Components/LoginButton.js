@@ -4,11 +4,12 @@ import { StyledLoginButton } from "../Styled/StyledHamburgerMenu";
 
 export function LoginButton({ handleClick }) {
 
-    const { loginWithRedirect, user, isAuthenticated, logout, } = useAuth0();
+    const { loginWithPopup, user, isAuthenticated, logout, } = useAuth0();
 
     // After Click I need to close the div
     const loginAndCloseDiv = (event) => {
-        loginWithRedirect()
+        loginWithPopup()
+        console.log("Log in with Redirect");
         handleClick(event)
     }
 

@@ -3,7 +3,7 @@ import { createGlobalStyle } from "styled-components"
 export const GlobalStyle = createGlobalStyle`
 *{
     box-sizing: border-box;
-    color: var(--main-text-color);
+    color: black;
     font-family: 'Raleway',sans-serif;
 }
 :root{

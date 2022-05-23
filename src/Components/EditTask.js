@@ -64,7 +64,7 @@ export default function EditTask({ taskKey, setIsEdit, defaultValue, defaultTag,
                     onChange={(event) => handleTextBoxChange(event)}
                     autoFocus />
                 <StyledEditControlsDiv>
-                    <TagIcons taskIndex={taskKey} handleTagChange={handleTagChange} />
+                <TagIcons taskIndex={taskKey} handleTagChange={handleTagChange} activePalette={"clean"} />
 
                 {(action === "Update") && <MdOutlineDone onClick={(event) => handleAccept(event)} style={{ "color": "green", "cursor": "pointer" }} data-action="update" />}
                 {(action === "Update") && <IoTrashBin onClick={(event) => handleAccept(event)} style={{ "color": "darkblue", "cursor": "pointer" }} data-action="delete" />}

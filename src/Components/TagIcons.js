@@ -5,12 +5,12 @@ import { palette } from "../Styled/theme"
 import { availableTagsList } from "../helperFunctions/availableTags.js"
 
 
-export function TagIcons({ handleTagChange }) {
+export function TagIcons({ handleTagChange, activePalette }) {
     // This has to be centrally controlled
     const [availableTags] = useState(availableTagsList)
     // This has to come from context
     const userSettings = { palette: "clean" }
-    const [colors, setColors] = useState(palette[userSettings.palette])
+    const [colors, setColors] = useState(palette[activePalette])
 
     return (
         availableTags.map((tag) => (

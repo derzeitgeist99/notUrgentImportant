@@ -17,7 +17,8 @@ root.render(
       clientId={autho0Config.clientId}
       redirectUri={window.location.origin}
       audience={autho0Config.audience}
-      useRefreshTokens={true}>
+      useRefreshTokens={true}
+      cacheLocation={"localstorage"}>
       <TaskDataProvider>
     <App />
       </TaskDataProvider>
