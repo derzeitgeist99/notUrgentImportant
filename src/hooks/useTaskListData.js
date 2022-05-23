@@ -8,7 +8,6 @@ export default () => {
         const token = await getAccessTokenSilently()
         const data = await myFetch("POST", token, "getTasks", taskListFilter)
         setTaskListData(data)
-        console.log("Calling from downloadTaskData");
     }
     const [taskListData, setTaskListData] = useState([])
     const [taskListFilter, setTaskListfilter] = useState({ tag: false, count: 3, edit: false })
@@ -16,7 +15,6 @@ export default () => {
     useEffect(() => {
         const init = async () => {
             const result = await downloadTaskListData()
-            console.log("Calling from useEffect");
         }
         init()
     }, [taskListFilter])
