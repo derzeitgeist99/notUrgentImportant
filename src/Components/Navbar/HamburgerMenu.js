@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi"
 import { IoCloseSharp } from "react-icons/io5"
-import { StyledHamburgerIcon } from "../Styled/StyledHamburgerMenu";
+import { StyledHamburgerIcon } from "./StyledNavbar/StyledHamburgerMenu"
 
 export function HamburgerMenu({ setMenuOpen, menuOpen, handleClick }) {
 

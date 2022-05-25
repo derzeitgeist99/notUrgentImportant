@@ -1,7 +1,7 @@
 import React from "react";
-import { Main } from "../Styled/main";
-import { StyledNewTaskOverlay } from "../Styled/StyledNewTaskOverlay";
-import { StyledContainer, StyledTaskBox } from "../Styled/StyledTaskList";
+import { Main } from "../../Styled/main";
+import { StyledNewTaskOverlay } from "./StyledMainList/StyledNewTaskOverlay"
+import { StyledContainer, StyledTaskBox } from "./StyledMainList/StyledTaskList";
 import EditTask from "./EditTask";
 
 export function NewTask({ updateIncrementallyTaskListdata, setIsEdit, palette, action }) {

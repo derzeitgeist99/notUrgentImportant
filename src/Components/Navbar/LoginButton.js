@@ -1,6 +1,7 @@
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import { StyledLoginButton } from "../Styled/StyledHamburgerMenu";
+import { StyledLoginButton } from "./StyledNavbar/StyledHamburgerMenu"
+import useTaskListData from "../../hooks/useTaskListData";
 
 export function LoginButton({ handleClick }) {
 
@@ -11,6 +12,8 @@ export function LoginButton({ handleClick }) {
         loginWithPopup()
         console.log("Log in with Redirect");
         handleClick(event)
+
+
     }
 
     const loginOutAndCloseDiv = (event) => {

@@ -1,5 +1,5 @@
 import React from "react";
-import { StyledList, StyledLoginButton, StyledNavbarLink } from "../Styled/StyledHamburgerMenu";
+import { StyledList, StyledLoginButton, StyledNavbarLink } from "./StyledNavbar/StyledHamburgerMenu";
 import { LoginButton } from "./LoginButton";
 
 

@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { StyledList, StyledNavbarLink } from '../Styled/StyledHamburgerMenu';
-import { StyledLogo, StyledNavbar } from '../Styled/StyledNavbar';
+import { StyledLogo, StyledNavbar } from "./StyledNavbar/StyledNavbar"
 import { HamburgerMenu } from './HamburgerMenu';
-import { NavbarLinks } from './NavbarLinks';
+import { NavbarLinks } from "./NavbarLinks"
 
 export default function Navbar() {
     const [menuOpen, setMenuOpen] = useState(false)

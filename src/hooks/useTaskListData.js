@@ -18,7 +18,7 @@ export default () => {
             const result = await downloadTaskListData()
         }
         init()
-    }, [taskListFilter])
+    }, [taskListFilter, user])
 
     // Updates with data already in state
     const updateIncrementallyTaskListdata = (newEntry, action) => {

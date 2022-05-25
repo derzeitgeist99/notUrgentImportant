@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { StyledFilterContainer, StyledFilterPill } from "../Styled/FilterBox";
-import { availableTagsList } from "../helperFunctions/availableTags";
-import { palette } from "../Styled/theme"
+import { StyledFilterContainer, StyledFilterPill } from "./StyledMainList/FilterBox"
+import { availableTagsList } from "../../helperFunctions/availableTags";
 import { AiOutlineEdit } from "react-icons/ai";
 import { HiOutlineDocumentAdd } from "react-icons/hi"
+import { useColors } from "../../Context/ColorsContext";
 
-export function FilterBox({ paletteName, setFilter, taskListFilter }) {
+export function FilterBox({ setFilter, taskListFilter }) {
     const [availableTags] = useState(availableTagsList)
-    const [colors] = useState(palette[paletteName])
+    const [colors] = useColors()
 
     const handleFilterPillClick = (event) => {
         event.preventDefault();

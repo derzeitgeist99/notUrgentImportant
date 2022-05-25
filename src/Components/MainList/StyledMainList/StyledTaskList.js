@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { palette } from "./theme";
 
 //Here
 export const StyledContainer = styled.div`
@@ -16,7 +15,7 @@ height: max(2.5vh, 120px);
 margin: 0.5rem;
 display: grid;
 grid-template-rows: 1fr 15%;
-background-color: ${props => palette[props.palette][props.taskColor]};
+background-color: ${props => props.backgroundColor};
 `
 
 export const StyledTask = styled.div`
@@ -33,7 +32,6 @@ font-size: 1rem;
 background-color: inherit;
 
 `
-
 
 
 export const StyledEditControlsDiv = styled.div`

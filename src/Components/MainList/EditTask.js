@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { StyledEditControlsDiv, StyledEditTask, StyledTaskBox } from "../Styled/StyledTaskList";
-import useTaskListData from "../hooks/useTaskListData";
+import React, { useState } from "react";
+import { StyledEditControlsDiv, StyledEditTask, } from "./StyledMainList/StyledTaskList";
+import { useColors } from "../../Context/ColorsContext";
+
 import { useAuth0 } from "@auth0/auth0-react";
-import { myFetch } from "../helperFunctions/fetch";
+// helpers
+import { myFetch } from "../../helperFunctions/fetch"
+import { definePayload } from "../../helperFunctions/definePayload";
 // Icons
 import { MdOutlineDone, MdCancel } from "react-icons/md"
 import { HiOutlineDocumentAdd } from "react-icons/hi"
 import { IoTrashBin } from "react-icons/io5"
-import { definePayload } from "../helperFunctions/definePayload";
 import { TagIcons } from "./TagIcons"
 
 export default function EditTask({ taskKey, setIsEdit, defaultValue, defaultTag, updateIncrementallyTaskListdata, action }) {
@@ -16,6 +18,7 @@ export default function EditTask({ taskKey, setIsEdit, defaultValue, defaultTag,
         "tag": defaultTag
     })
     const { isAuthenticated, getAccessTokenSilently, user } = useAuth0();
+    const [colors] = useColors()
 
     const handleTextBoxChange = (event) => {
         event.preventDefault()
@@ -59,18 +62,18 @@ export default function EditTask({ taskKey, setIsEdit, defaultValue, defaultTag,
     return (
         <>
 
-                <StyledEditTask
-                    defaultValue={defaultValue}
-                    onChange={(event) => handleTextBoxChange(event)}
-                    autoFocus />
-                <StyledEditControlsDiv>
-                <TagIcons taskIndex={taskKey} handleTagChange={handleTagChange} activePalette={"clean"} />
+            <StyledEditTask
+                defaultValue={defaultValue}
+                onChange={(event) => handleTextBoxChange(event)}
+                autoFocus />
+            <StyledEditControlsDiv>
+                <TagIcons handleTagChange={handleTagChange} colors={colors} />
 
                 {(action === "Update") && <MdOutlineDone onClick={(event) => handleAccept(event)} style={{ "color": "green", "cursor": "pointer" }} data-action="update" />}
                 {(action === "Update") && <IoTrashBin onClick={(event) => handleAccept(event)} style={{ "color": "darkblue", "cursor": "pointer" }} data-action="delete" />}
                 {(action === "Create") && <HiOutlineDocumentAdd onClick={(event) => handleAccept(event)} style={{ "color": "darkblue", "cursor": "pointer" }} data-action="create" />}
                 <MdCancel onClick={(event) => handleCancel(event)} style={{ "color": "red", "cursor": "pointer" }} />
-                </StyledEditControlsDiv>
+            </StyledEditControlsDiv>
 
         </>
     )

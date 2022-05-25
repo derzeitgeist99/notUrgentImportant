@@ -1,16 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { FaCircle } from "react-icons/fa"
-import { useTaskData } from "../Context/TaskDataContext";
-import { palette } from "../Styled/theme"
-import { availableTagsList } from "../helperFunctions/availableTags.js"
+import { availableTagsList } from "../../helperFunctions/availableTags.js"
 
 
-export function TagIcons({ handleTagChange, activePalette }) {
-    // This has to be centrally controlled
+
+export function TagIcons({ handleTagChange, colors }) {
     const [availableTags] = useState(availableTagsList)
-    // This has to come from context
-    const userSettings = { palette: "clean" }
-    const [colors, setColors] = useState(palette[activePalette])
 
     return (
         availableTags.map((tag) => (

@@ -2,17 +2,23 @@ import React, { useState } from "react";
 import InputGroup from 'react-bootstrap/InputGroup'
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import Dropdown from 'react-bootstrap/Dropdown'
-import { palette } from "../Styled/theme";
-import { TagIcons } from "./TagIcons";
+import { palette as GlobalPalette } from "../../Styled/theme"
+import { TagIcons } from "../MainList/TagIcons";
+import { useColors } from "../../Context/ColorsContext";
 
 export function SetThemeButton() {
-    const [availablePalettes] = useState(Object.keys(palette))
+    const [availablePalettes] = useState(Object.keys(GlobalPalette))
     const [activePallete, setActivePallete] = useState(window.localStorage.palette)
+    const [colors, setColors] = useColors()
+
 
     const handlePaletteSelect = ((event, palette) => {
         event.preventDefault()
         window.localStorage.setItem("palette", palette)
+        // this impacts grey backround on the button
         setActivePallete(palette)
+        // this sets context and impacts overall look of the app
+        setColors(GlobalPalette[palette])
     })
 
 
@@ -24,11 +30,9 @@ export function SetThemeButton() {
                     onClick={event => handlePaletteSelect(event, palette)}
                     style={(palette == activePallete) ? { background: "lightgrey" } : { background: "white" }}
                 >
-                    {palette} <TagIcons activePalette={palette} />
+                    {palette} <TagIcons colors={GlobalPalette[palette]} />
                 </Dropdown.Item>)}
-
         </DropdownButton>
-
     </InputGroup>
     )
 }
