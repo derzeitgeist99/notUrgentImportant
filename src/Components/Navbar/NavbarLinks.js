@@ -17,6 +17,12 @@ export function NavbarLinks({ handleClick }) {
             <li>
                 <StyledNavbarLink to="/settings" onClick={(event) => handleClick(event)}>Settings </StyledNavbarLink>
             </li>
+            <li>
+                <StyledNavbarLink to="/about" onClick={(event) => handleClick(event)}>About </StyledNavbarLink>
+            </li>
+            <li>
+                <StyledNavbarLink to="/faq" onClick={(event) => handleClick(event)}>FAQ </StyledNavbarLink>
+            </li>
 
             <LoginButton handleClick={handleClick} />
 

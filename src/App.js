@@ -5,6 +5,8 @@ import Settings from './Pages/Settings';
 import { GlobalStyle } from './Styled/GlobalStyle';
 import Navbar from './Components/Navbar/Navbar';
 import { Main } from './Styled/main';
+import { About } from './Pages/About';
+import { FAQ } from './Pages/FAQ';
 
 
 function App() {
@@ -18,6 +20,8 @@ function App() {
       <Routes>
           <Route path="/" element={<MainList />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/faq" element={<FAQ />} />
       </Routes>
       </Main>
     </BrowserRouter>
