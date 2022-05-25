@@ -9,7 +9,7 @@ export default function Settings() {
 
     return (
         <>
-        <h1>Settings</h1>
+            <h1>Settings</h1>
             <StyledSettingsLine>
 
                 <p>Select number of tasks to be displayed</p>
