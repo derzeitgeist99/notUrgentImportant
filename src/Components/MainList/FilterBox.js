@@ -37,7 +37,8 @@ export function FilterBox({ setFilter, taskListFilter }) {
                     color={colors[tag]}
                     data-tag={tag}
                     onClick={(event) => handleFilterPillClick(event)}
-                    borderStyle={(tag === taskListFilter.tag) ? "solid" : "none"}
+                    brightness={(tag === taskListFilter.tag) ? "90%" : "100%"}
+                    shadow={(tag === taskListFilter.tag) ? "4px 4px" : ""}
                 >{tag}</StyledFilterPill>
             )
             )}
