@@ -9,7 +9,7 @@ margin: 0.7rem auto;
 
 
 export const StyledFilterPill = styled.p`
-width: max(50px, 10%);
+width: max(40px, 10%);
 height: 30px;
 border-radius: 10px;
 filter: brightness(${props => props.brightness});

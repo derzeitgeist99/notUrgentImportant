@@ -11,6 +11,7 @@ import { MdOutlineDone, MdCancel } from "react-icons/md"
 import { HiOutlineDocumentAdd } from "react-icons/hi"
 import { IoTrashBin } from "react-icons/io5"
 import { TagIcons } from "./TagIcons"
+import { StyledFilterPill } from "./StyledMainList/FilterBox";
 
 export default function EditTask({ taskKey, setIsEdit, defaultValue, defaultTag, updateIncrementallyTaskListdata, action, initialTagColor }) {
     const [airtableFields, setAirtableFields] = useState({
@@ -75,10 +76,41 @@ export default function EditTask({ taskKey, setIsEdit, defaultValue, defaultTag,
             <StyledEditControlsDiv>
                 <TagIcons handleTagChange={handleTagChange} colors={colors} />
 
-                {(action === "Update") && <MdOutlineDone onClick={(event) => handleAccept(event)} style={{ "color": "green", "cursor": "pointer" }} data-action="update" />}
-                {(action === "Update") && <IoTrashBin onClick={(event) => handleAccept(event)} style={{ "color": "darkblue", "cursor": "pointer" }} data-action="delete" />}
+                {/* {(action === "Update") && <MdOutlineDone onClick={(event) => handleAccept(event)} style={{ "color": "green", "cursor": "pointer" }} data-action="update" />} */}
+                {/* {(action === "Update") && <IoTrashBin onClick={(event) => handleAccept(event)} style={{ "color": "darkblue", "cursor": "pointer" }} data-action="delete" />} */}
                 {(action === "Create") && <HiOutlineDocumentAdd onClick={(event) => handleAccept(event)} style={{ "color": "darkblue", "cursor": "pointer" }} data-action="create" />}
-                <MdCancel onClick={(event) => handleCancel(event)} style={{ "color": "red", "cursor": "pointer" }} />
+                {(action === "Create") &&
+                    <StyledFilterPill
+                        onClick={(event) => handleAccept(event)}
+                        data-action="create"
+                        color="blue"
+
+                    >OK</StyledFilterPill>
+                }
+
+                {(action === "Update") &&
+                    <StyledFilterPill
+                        onClick={(event) => handleAccept(event)}
+                        data-action="update"
+                        color="green"
+
+                    >OK</StyledFilterPill>
+                }
+                {(action === "Update") &&
+                    <StyledFilterPill
+                        onClick={(event) => handleAccept(event)}
+                        data-action="delete"
+                        color="orange"
+
+                    ><IoTrashBin /></StyledFilterPill>
+                }
+
+                <StyledFilterPill
+                    onClick={(event) => handleCancel(event)}
+                    color="red"
+
+                ><MdCancel /></StyledFilterPill>
+                {/* <MdCancel onClick={(event) => handleCancel(event)} style={{ "color": "red", "cursor": "pointer" }} /> */}
             </StyledEditControlsDiv>
 
         </>
