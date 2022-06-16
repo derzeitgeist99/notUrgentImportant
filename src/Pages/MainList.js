@@ -37,19 +37,22 @@ export default function TaskList() {
             <FilterBox
                 paletteName={userSettings.palette}
                 setFilter={setFilter}
-                taskListFilter={taskListFilter} />
+                taskListFilter={taskListFilter}
+            />
             <HandleEmptyList taskListData={taskListData} />
             <StyledContainer>
                 {Object.keys(taskListData).map((taskKey) => (
                     <StyledTaskBox key={taskKey}
                         backgroundColor={colors[taskListData[taskKey]["tag"]]}
-                        opacity={(isEdit === taskKey) ? "0.5" : "1"}  >
+
+                    >
 
                         {(isEdit !== taskKey) ?
                             <TaskBox
                                 task={taskListData[taskKey]}
                                 handleEditButton={handleEditButton}
                                 showEditDiv={taskListFilter.edit}
+
                             />
                             :
                             <EditTask
@@ -58,7 +61,8 @@ export default function TaskList() {
                                 defaultTag={taskListData[taskKey].tag}
                                 updateIncrementallyTaskListdata={updateIncrementallyTaskListdata}
                                 setIsEdit={setIsEdit}
-                                action="Update" />}
+                                action="Update"
+                                backgroundColor={colors[taskListData[taskKey]["tag"]]} />}
 
                     </StyledTaskBox>
                 ))}

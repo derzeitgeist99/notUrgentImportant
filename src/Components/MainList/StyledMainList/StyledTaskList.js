@@ -22,6 +22,7 @@ export const StyledTask = styled.div`
 margin: 0.0rem;
 padding: 2rem;
 grid-area: 1 / 1 / 2 / 3;
+
 `
 
 export const StyledEditTask = styled.input`
@@ -32,6 +33,7 @@ border-style: solid;
 font-size: 1rem;
 padding: 2rem;
 background-color: inherit;
+
 
 `
 
