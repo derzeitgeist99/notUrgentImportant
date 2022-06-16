@@ -15,11 +15,12 @@ height: max(2.5vh, 120px);
 margin: 0.5rem;
 display: grid;
 grid-template-rows: 1fr 15%;
-background-color: ${props => props.backgroundColor};
+background-color: ${props => props.backgroundColor} ;
 `
 
 export const StyledTask = styled.div`
 margin: 0.0rem;
+padding: 2rem;
 grid-area: 1 / 1 / 2 / 3;
 `
 
@@ -29,6 +30,7 @@ padding: 0;
 grid-area: 1 / 1 / 2 / 3;
 border-style: solid;
 font-size: 1rem;
+padding: 2rem;
 background-color: inherit;
 
 `

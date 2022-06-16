@@ -42,7 +42,8 @@ export default function TaskList() {
             <StyledContainer>
                 {Object.keys(taskListData).map((taskKey) => (
                     <StyledTaskBox key={taskKey}
-                        backgroundColor={colors[taskListData[taskKey]["tag"]]}  >
+                        backgroundColor={colors[taskListData[taskKey]["tag"]]}
+                        opacity={(isEdit === taskKey) ? "0.5" : "1"}  >
 
                         {(isEdit !== taskKey) ?
                             <TaskBox
