@@ -13,14 +13,16 @@ justify-content: flex-start;
 export const StyledTaskBox = styled.div`
 height: max(2.5vh, 120px);
 margin: 0.5rem;
+margin-bottom: 2rem;
 display: grid;
 grid-template-rows: 1fr 15%;
-background-color: ${props => props.backgroundColor} ;
 `
 
 export const StyledTask = styled.div`
+background-color: ${props => props.backgroundColor} ;
 margin: 0.0rem;
 padding: 2rem;
+font-size: 1rem;
 grid-area: 1 / 1 / 2 / 3;
 
 `
@@ -32,7 +34,8 @@ grid-area: 1 / 1 / 2 / 3;
 border-style: solid;
 font-size: 1rem;
 padding: 2rem;
-background-color: inherit;
+//background-color: inherit;
+background-color: ${props => props.backgroundColor} ;
 
 
 `

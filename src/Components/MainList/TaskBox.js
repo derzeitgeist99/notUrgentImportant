@@ -3,21 +3,22 @@ import { AiOutlineEdit } from "react-icons/ai";
 import { StyledEditControlsDiv, StyledTask } from "./StyledMainList/StyledTaskList";
 
 
-export function TaskBox({ task, handleEditButton, showEditDiv }) {
+export function TaskBox({ task, handleEditButton, backgroundColor }) {
 
 
 
     return (<>
-        <StyledTask>
+        <StyledTask
+            backgroundColor={backgroundColor}>
             {task.taskDescription}
         </StyledTask>
-        {showEditDiv &&
+
             <StyledEditControlsDiv>
                 <AiOutlineEdit onClick={event => handleEditButton(event, task.taskKey)} style={{
                     "color": "blue",
                     "cursor": "pointer"
                 }} />
 
-            </StyledEditControlsDiv>}
+        </StyledEditControlsDiv>
     </>);
 }

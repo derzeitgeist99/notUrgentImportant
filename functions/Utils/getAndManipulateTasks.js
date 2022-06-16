@@ -2,7 +2,7 @@ const { formatResults, configureAirtableTable } = require("./AirtableUtils")
 
 const trimResults = (filter, results) => {
     // when entering edit Mode, user wants to see all tasks
-    if (filter.edit) {
+    if (filter.all) {
         return results
     }
     // converting to array
@@ -29,7 +29,6 @@ const shuffle = (array, desiredLength) => {
 
 
     }
-    const keepArray = array.slice(0, desiredLength)
     const removeArray = array.slice(desiredLength)
     return removeArray
 }
@@ -50,7 +49,7 @@ const getAndManipulateTasks = async (userId, filter) => {
     const formattedResults = formatResults(result)
     const trimmedResults = trimResults(filter, formattedResults)
     console.log("Called Airtable: getTasksByUserId");
-    return formattedResults
+    return trimmedResults
 }
 module.exports = {
     getAndManipulateTasks

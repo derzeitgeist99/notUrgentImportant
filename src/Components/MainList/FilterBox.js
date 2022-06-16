@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { StyledFilterContainer, StyledFilterPill } from "./StyledMainList/FilterBox"
 import { availableTagsList } from "../../helperFunctions/availableTags";
-import { AiOutlineEdit } from "react-icons/ai";
-import { HiOutlineDocumentAdd } from "react-icons/hi"
 import { useColors } from "../../Context/ColorsContext";
 
 export function FilterBox({ setFilter, taskListFilter }) {
@@ -21,7 +19,7 @@ export function FilterBox({ setFilter, taskListFilter }) {
 
     const handleEditPillClick = (event) => {
         event.preventDefault();
-        setFilter({ edit: !taskListFilter.edit, tag: false })
+        setFilter({ all: !taskListFilter.all, tag: false })
     }
 
     const handleNewTaskPillClick = (event) => {
@@ -45,14 +43,16 @@ export function FilterBox({ setFilter, taskListFilter }) {
             <StyledFilterPill
                 color={"lightgrey"}
                 onClick={(event) => handleEditPillClick(event)}
-                borderStyle={(taskListFilter.edit) ? "solid" : "none"}>
-                <AiOutlineEdit />
+                borderStyle={(taskListFilter.edit) ? "solid" : "none"}
+                style={{ "font-size": "0.85rem", "line-height": "1rem" }}>
+                All <br /> Tasks
             </StyledFilterPill>
             <StyledFilterPill
                 color={"lightgrey"}
                 onClick={(event) => handleNewTaskPillClick(event)}
+                style={{ "font-size": "0.85rem", "line-height": "1rem" }}
             >
-                <HiOutlineDocumentAdd />
+                New<br /> Task
             </StyledFilterPill>
         </StyledFilterContainer>
     )

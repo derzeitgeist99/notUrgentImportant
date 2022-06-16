@@ -43,7 +43,6 @@ export default function TaskList() {
             <StyledContainer>
                 {Object.keys(taskListData).map((taskKey) => (
                     <StyledTaskBox key={taskKey}
-                        backgroundColor={colors[taskListData[taskKey]["tag"]]}
 
                     >
 
@@ -51,7 +50,7 @@ export default function TaskList() {
                             <TaskBox
                                 task={taskListData[taskKey]}
                                 handleEditButton={handleEditButton}
-                                showEditDiv={taskListFilter.edit}
+                                backgroundColor={colors[taskListData[taskKey]["tag"]]}
 
                             />
                             :
@@ -62,7 +61,8 @@ export default function TaskList() {
                                 updateIncrementallyTaskListdata={updateIncrementallyTaskListdata}
                                 setIsEdit={setIsEdit}
                                 action="Update"
-                                backgroundColor={colors[taskListData[taskKey]["tag"]]} />}
+                                initialTagColor={taskListData[taskKey]["tag"]}
+                            />}
 
                     </StyledTaskBox>
                 ))}

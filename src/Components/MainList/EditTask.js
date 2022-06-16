@@ -12,13 +12,15 @@ import { HiOutlineDocumentAdd } from "react-icons/hi"
 import { IoTrashBin } from "react-icons/io5"
 import { TagIcons } from "./TagIcons"
 
-export default function EditTask({ taskKey, setIsEdit, defaultValue, defaultTag, updateIncrementallyTaskListdata, action }) {
+export default function EditTask({ taskKey, setIsEdit, defaultValue, defaultTag, updateIncrementallyTaskListdata, action, initialTagColor }) {
     const [airtableFields, setAirtableFields] = useState({
         "taskDescription": defaultValue,
         "tag": defaultTag
     })
     const { isAuthenticated, getAccessTokenSilently, user } = useAuth0();
     const [colors] = useColors()
+
+    const [currentTagColor, setCurrentTagColor] = useState(initialTagColor)
 
     const handleTextBoxChange = (event) => {
         event.preventDefault()
@@ -27,7 +29,9 @@ export default function EditTask({ taskKey, setIsEdit, defaultValue, defaultTag,
 
     const handleTagChange = (event) => {
         event.preventDefault()
-        setAirtableFields(airtableFields, airtableFields.tag = parseInt(event.currentTarget.dataset.tag))
+        const newTag = parseInt(event.currentTarget.dataset.tag)
+        setCurrentTagColor(newTag)
+        setAirtableFields(airtableFields, airtableFields.tag = newTag)
     }
 
     const handleAccept = async (event) => {
@@ -66,6 +70,7 @@ export default function EditTask({ taskKey, setIsEdit, defaultValue, defaultTag,
                 defaultValue={defaultValue}
                 onChange={(event) => handleTextBoxChange(event)}
                 autoFocus
+                backgroundColor={colors[currentTagColor]}
             />
             <StyledEditControlsDiv>
                 <TagIcons handleTagChange={handleTagChange} colors={colors} />
