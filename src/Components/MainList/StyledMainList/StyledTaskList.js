@@ -29,7 +29,7 @@ grid-column: 1/3;
 `
 
 
-export const StyledEditControlsDiv = styled.div`
+export const StyledEditModeDiv = styled.div`
 padding: 0.2rem;
 place-self: center;
 grid-row: 2/3 ;

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { StyledEditControlsDiv } from "./StyledMainList/StyledTaskList";
 import { useColors } from "../../Context/ColorsContext";
 
 import { useAuth0 } from "@auth0/auth0-react";
@@ -66,7 +65,7 @@ export default function EditTask({ taskKey, setIsEdit, defaultValue, defaultTag,
                 autoFocus
                 backgroundColor={colors[currentTagColor]}
             />
-            <StyledEditControlsDiv>
+            <>
                 <StyledIconGroup>
                 <TagIcons handleTagChange={handleTagChange} colors={colors} />
                     <hr />
@@ -77,7 +76,7 @@ export default function EditTask({ taskKey, setIsEdit, defaultValue, defaultTag,
                         handleCancel={handleCancel}
                     />
                 </StyledIconGroup>
-            </StyledEditControlsDiv>
+            </>
 
         </>
     )
