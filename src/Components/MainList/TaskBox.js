@@ -1,15 +1,15 @@
 import React from "react";
 import { AiOutlineEdit } from "react-icons/ai";
+import { useColors } from "../../Context/ColorsContext";
 import { StyledEditControlsDiv, StyledTask } from "./StyledMainList/StyledTaskList";
 
 
-export function TaskBox({ task, handleEditButton, backgroundColor }) {
+export function TaskBox({ task, handleEditButton }) {
 
-
-
+    const [colors] = useColors()
     return (<>
         <StyledTask
-            backgroundColor={backgroundColor}>
+            backgroundColor={colors[task.tag]}>
             {task.taskDescription}
         </StyledTask>
 
@@ -18,6 +18,7 @@ export function TaskBox({ task, handleEditButton, backgroundColor }) {
                     "color": "blue",
                     "cursor": "pointer"
                 }} />
+
 
         </StyledEditControlsDiv>
     </>);

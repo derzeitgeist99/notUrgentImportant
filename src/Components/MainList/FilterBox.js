@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { StyledFilterContainer, StyledFilterPill } from "./StyledMainList/FilterBox"
+import { StyledFilterContainer, StyledActionPill } from "./StyledMainList/FilterBox"
 import { availableTagsList } from "../../helperFunctions/availableTags";
 import { useColors } from "../../Context/ColorsContext";
 
-export function FilterBox({ setFilter, taskListFilter }) {
+export function FilterBox({ setFilter, taskListFilter, setIsEdit }) {
     const [availableTags] = useState(availableTagsList)
     const [colors] = useColors()
 
@@ -17,43 +17,49 @@ export function FilterBox({ setFilter, taskListFilter }) {
 
     }
 
-    const handleEditPillClick = (event) => {
+    const handleAllPillClick = (event) => {
         event.preventDefault();
         setFilter({ all: !taskListFilter.all, tag: false })
+        console.log("Filter", taskListFilter.all);
     }
 
     const handleNewTaskPillClick = (event) => {
         event.preventDefault();
-        document.getElementById("NewTaskOverlay").style.display = "block";
+        setIsEdit({ taskKey: "new", editMode: "Create" })
+
     }
     return (
 
 
         <StyledFilterContainer>
             {availableTags.map((tag) => (
-                <StyledFilterPill key={tag}
+                <StyledActionPill key={tag}
                     color={colors[tag]}
                     data-tag={tag}
                     onClick={(event) => handleFilterPillClick(event)}
-                    brightness={(tag === taskListFilter.tag) ? "90%" : "100%"}
+                    brightness={(taskListFilter.tag === tag) ? "90%" : "100%"}
                     shadow={(tag === taskListFilter.tag) ? "4px 4px" : ""}
-                >{tag}</StyledFilterPill>
+                    pillType="filter"
+                >{tag}</StyledActionPill>
             )
             )}
-            <StyledFilterPill
+            <StyledActionPill
                 color={"lightgrey"}
-                onClick={(event) => handleEditPillClick(event)}
-                borderStyle={(taskListFilter.edit) ? "solid" : "none"}
-                style={{ "font-size": "0.85rem", "line-height": "1rem" }}>
+                onClick={(event) => handleAllPillClick(event)}
+                brightness={(taskListFilter.all) ? "90%" : "100%"}
+                shadow={(taskListFilter.all) ? "4px 4px" : ""}
+                style={{ "font-size": "0.85rem", "line-height": "1rem" }}
+                pillType="filter">
                 All <br /> Tasks
-            </StyledFilterPill>
-            <StyledFilterPill
+            </StyledActionPill>
+            <StyledActionPill
                 color={"lightgrey"}
                 onClick={(event) => handleNewTaskPillClick(event)}
                 style={{ "font-size": "0.85rem", "line-height": "1rem" }}
+                pillType="filter"
             >
                 New<br /> Task
-            </StyledFilterPill>
+            </StyledActionPill>
         </StyledFilterContainer>
     )
 }

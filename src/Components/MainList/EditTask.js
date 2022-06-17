@@ -1,27 +1,26 @@
 import React, { useState } from "react";
-import { StyledEditControlsDiv, StyledEditTask, } from "./StyledMainList/StyledTaskList";
+import { StyledEditControlsDiv } from "./StyledMainList/StyledTaskList";
 import { useColors } from "../../Context/ColorsContext";
 
 import { useAuth0 } from "@auth0/auth0-react";
 // helpers
 import { myFetch } from "../../helperFunctions/fetch"
 import { definePayload } from "../../helperFunctions/definePayload";
-// Icons
-import { MdOutlineDone, MdCancel } from "react-icons/md"
-import { HiOutlineDocumentAdd } from "react-icons/hi"
-import { IoTrashBin } from "react-icons/io5"
-import { TagIcons } from "./TagIcons"
-import { StyledFilterPill } from "./StyledMainList/FilterBox";
 
-export default function EditTask({ taskKey, setIsEdit, defaultValue, defaultTag, updateIncrementallyTaskListdata, action, initialTagColor }) {
+import { TagIcons } from "./TagIcons"
+import { StyledEditTaskInput, StyledIconGroup } from "./EditMode/StyledTagIconGroup";
+import EditModeActionPills from "./EditMode/EditModeActionPills";
+
+export default function EditTask({ taskKey, setIsEdit, defaultValue, defaultTag, updateIncrementallyTaskListdata, action }) {
+
     const [airtableFields, setAirtableFields] = useState({
         "taskDescription": defaultValue,
         "tag": defaultTag
     })
-    const { isAuthenticated, getAccessTokenSilently, user } = useAuth0();
+    const { getAccessTokenSilently } = useAuth0();
     const [colors] = useColors()
 
-    const [currentTagColor, setCurrentTagColor] = useState(initialTagColor)
+    const [currentTagColor, setCurrentTagColor] = useState(defaultTag)
 
     const handleTextBoxChange = (event) => {
         event.preventDefault()
@@ -48,69 +47,36 @@ export default function EditTask({ taskKey, setIsEdit, defaultValue, defaultTag,
         // then use the returned value to incrementally update state
         updateIncrementallyTaskListdata(data, action)
         // if airtable fails, then the edit mode does not close
-        setIsEdit(null)
+        setIsEdit({ taskKey: undefined, editMode: undefined })
         // deserves better error handling
-        // if this was called from overlay I want to close it. If not, no impact
-        document.getElementById("NewTaskOverlay").style.display = "none"
-
     }
 
     const handleCancel = (event) => {
         event.preventDefault()
-        setIsEdit(null)
-        // if this was called from overlay I want to close it. If not, no impact
-        document.getElementById("NewTaskOverlay").style.display = "none";
+        setIsEdit({ taskKey: undefined, editMode: undefined })
+
     }
-
-
 
     return (
         <>
 
-            <StyledEditTask
+            <StyledEditTaskInput
                 defaultValue={defaultValue}
                 onChange={(event) => handleTextBoxChange(event)}
                 autoFocus
                 backgroundColor={colors[currentTagColor]}
             />
             <StyledEditControlsDiv>
+                <StyledIconGroup>
                 <TagIcons handleTagChange={handleTagChange} colors={colors} />
-
-                {/* {(action === "Update") && <MdOutlineDone onClick={(event) => handleAccept(event)} style={{ "color": "green", "cursor": "pointer" }} data-action="update" />} */}
-                {/* {(action === "Update") && <IoTrashBin onClick={(event) => handleAccept(event)} style={{ "color": "darkblue", "cursor": "pointer" }} data-action="delete" />} */}
-                {(action === "Create") && <HiOutlineDocumentAdd onClick={(event) => handleAccept(event)} style={{ "color": "darkblue", "cursor": "pointer" }} data-action="create" />}
-                {(action === "Create") &&
-                    <StyledFilterPill
-                        onClick={(event) => handleAccept(event)}
-                        data-action="create"
-                        color="blue"
-
-                    >OK</StyledFilterPill>
-                }
-
-                {(action === "Update") &&
-                    <StyledFilterPill
-                        onClick={(event) => handleAccept(event)}
-                        data-action="update"
-                        color="green"
-
-                    >OK</StyledFilterPill>
-                }
-                {(action === "Update") &&
-                    <StyledFilterPill
-                        onClick={(event) => handleAccept(event)}
-                        data-action="delete"
-                        color="orange"
-
-                    ><IoTrashBin /></StyledFilterPill>
-                }
-
-                <StyledFilterPill
-                    onClick={(event) => handleCancel(event)}
-                    color="red"
-
-                ><MdCancel /></StyledFilterPill>
-                {/* <MdCancel onClick={(event) => handleCancel(event)} style={{ "color": "red", "cursor": "pointer" }} /> */}
+                    <hr />
+                    <hr />
+                    <EditModeActionPills
+                        action={action}
+                        handleAccept={handleAccept}
+                        handleCancel={handleCancel}
+                    />
+                </StyledIconGroup>
             </StyledEditControlsDiv>
 
         </>

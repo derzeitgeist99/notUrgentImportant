@@ -12,13 +12,9 @@ export default function Navbar() {
 
     return (
         <StyledNavbar>
-
             <StyledLogo>Y.I.T.</StyledLogo>
             <HamburgerMenu menuOpen={menuOpen} setMenuOpen={setMenuOpen} handleClick={handleClick} />
-
             {menuOpen && <NavbarLinks handleClick={handleClick} />}
-
-
         </StyledNavbar>
     )
 }

@@ -22,6 +22,8 @@ export function FAQ() {
                 <li>Come up with a fun game for your kids</li>
             </ul>
             <p>You know, the personal development stuff we all like to read about but we never do...</p>
+            <h5>Is there a limit on number of tasks?</h5>
+            <p>Yes. Max is 200 tasks.</p>
         </>
     )
 }

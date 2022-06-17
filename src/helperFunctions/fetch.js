@@ -9,6 +9,7 @@ export const myFetch = async (method, token, functionName, payload = null) => {
     }
 
     const result = await fetch(`${url}${functionName}`, options)
+    console.log(`${url}${functionName}`)
     console.log("Fetch:", `${url}${functionName}`, options);
     const data = await result.json()
     return data
