@@ -21,7 +21,7 @@ export const StyledTask = styled.div`
 background-color: ${props => props.backgroundColor} ;
 margin: 0.0rem;
 padding: 2rem;
-font-size: 1rem;
+fontSize: 1rem;
 grid-row: 1 /3 ;
 grid-column: 1/3;
 

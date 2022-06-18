@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { availableTagsList } from "../../helperFunctions/availableTags.js"
 import { StyledActionPill } from "./StyledMainList/FilterBox.js";
 

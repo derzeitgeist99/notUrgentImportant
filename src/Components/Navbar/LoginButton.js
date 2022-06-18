@@ -7,10 +7,10 @@ export function LoginButton({ handleClick }) {
 
     const { loginWithPopup, user, isAuthenticated, logout, } = useAuth0();
 
+
     // After Click I need to close the div
     const loginAndCloseDiv = (event) => {
         loginWithPopup()
-        console.log("Log in with Redirect");
         handleClick(event)
 
 

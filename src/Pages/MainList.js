@@ -1,42 +1,34 @@
 import { TaskBox } from '../Components/MainList/TaskBox';
 import React, { useState } from "react";
 import { StyledContainer, StyledTaskBox } from "../Components/MainList/StyledMainList/StyledTaskList";
-
 import useTaskListData from "../hooks/useTaskListData";
 import { FilterBox } from '../Components/MainList/FilterBox';
 import { HandleEmptyList } from '../Components/HandleEmptyList';
 import { EditModal } from '../Components/MainList/EditModal';
 
 
-
 export default function TaskList() {
 
-
-    const { taskListData,
-        updateIncrementallyTaskListdata,
-        setFilter, taskListFilter
-    }
-        = useTaskListData([])
-
-    const userSettings = { palette: "clean" }
+    const { taskListData, updateIncrementallyTaskListdata, setFilter, taskListFilter } = useTaskListData([])
     const [isEdit, setIsEdit] = useState({ taskKey: undefined, editMode: undefined })
-
 
     const handleEditButton = (event, taskKey) => {
         event.preventDefault()
         setIsEdit({ taskKey: taskKey, editMode: "Update" })
     }
 
-
     return (
         <>
+            {/* Action and Filter Pills on Top */}
             <FilterBox
-                paletteName={userSettings.palette}
+
                 setFilter={setFilter}
                 taskListFilter={taskListFilter}
                 setIsEdit={setIsEdit}
             />
-            <HandleEmptyList taskListData={taskListData} />
+            {/* Handle empty list */}
+            {(Object.keys(taskListData).length === 0) && <HandleEmptyList taskListData={taskListData} />}
+            {/* List of tasks */}
             <StyledContainer>
                 {Object.keys(taskListData).map((taskKey) => (
                     <StyledTaskBox key={taskKey}>
@@ -54,7 +46,6 @@ export default function TaskList() {
                     defaultTag={taskListData[isEdit.taskKey].tag}
                     updateIncrementallyTaskListdata={updateIncrementallyTaskListdata}
                     setIsEdit={setIsEdit}
-                    //palette={userSettings.palette}
                     action={isEdit.editMode} />
                 }
 

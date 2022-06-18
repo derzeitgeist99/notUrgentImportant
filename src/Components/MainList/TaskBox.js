@@ -17,9 +17,7 @@ export function TaskBox({ task, handleEditButton }) {
                 <AiOutlineEdit onClick={event => handleEditButton(event, task.taskKey)} style={{
                     "color": "blue",
                     "cursor": "pointer"
-                }} />
-
-
+            }} />
         </StyledEditModeDiv>
     </>);
 }

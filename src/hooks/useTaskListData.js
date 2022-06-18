@@ -4,6 +4,7 @@ import { myFetch } from '../helperFunctions/fetch';
 
 export default () => {
     const { isAuthenticated, getAccessTokenSilently, user } = useAuth0();
+    console.log(isAuthenticated)
     const downloadTaskListData = async () => {
         const token = await getAccessTokenSilently()
         const data = await myFetch("POST", token, "getTasks", taskListFilter)
@@ -15,10 +16,14 @@ export default () => {
 
     useEffect(() => {
         const init = async () => {
-            const result = await downloadTaskListData()
+            try {
+                const result = await downloadTaskListData()
+            } catch (error) {
+
+            }
         }
         init()
-    }, [taskListFilter, user])
+    }, [taskListFilter, user, isAuthenticated])
 
     // Updates with data already in state
     const updateIncrementallyTaskListdata = (newEntry, action) => {

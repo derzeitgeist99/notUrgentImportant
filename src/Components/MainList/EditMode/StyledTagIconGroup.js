@@ -39,7 +39,7 @@ margin: auto;
 padding: 0;
 grid-area: 1 / 1 / 2 / 3;
 border-style: solid;
-font-size: 1rem;
+fontSize: 1rem;
 padding: 2rem;
 background-color: ${props => props.backgroundColor} ;
 

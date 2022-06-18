@@ -48,14 +48,14 @@ export function FilterBox({ setFilter, taskListFilter, setIsEdit }) {
                 onClick={(event) => handleAllPillClick(event)}
                 brightness={(taskListFilter.all) ? "90%" : "100%"}
                 shadow={(taskListFilter.all) ? "4px 4px" : ""}
-                style={{ "font-size": "0.85rem", "line-height": "1rem" }}
+                style={{ "fontSize": "0.85rem", "lineHeight": "1rem" }}
                 pillType="filter">
                 All <br /> Tasks
             </StyledActionPill>
             <StyledActionPill
                 color={"lightgrey"}
                 onClick={(event) => handleNewTaskPillClick(event)}
-                style={{ "font-size": "0.85rem", "line-height": "1rem" }}
+                style={{ "fontSize": "0.85rem", "lineHeight": "1rem" }}
                 pillType="filter"
             >
                 New<br /> Task
