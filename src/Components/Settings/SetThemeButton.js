@@ -3,8 +3,8 @@ import InputGroup from 'react-bootstrap/InputGroup'
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import Dropdown from 'react-bootstrap/Dropdown'
 import { palette as GlobalPalette } from "../../Styled/theme"
-import { TagIcons } from "../MainList/TagIcons";
 import { useColors } from "../../Context/ColorsContext";
+import TagIconsSettings from "./TagIconsSettings";
 
 export function SetThemeButton() {
     const [availablePalettes] = useState(Object.keys(GlobalPalette))
@@ -30,7 +30,8 @@ export function SetThemeButton() {
                     onClick={event => handlePaletteSelect(event, palette)}
                     style={(palette == activePallete) ? { background: "lightgrey" } : { background: "white" }}
                 >
-                    {palette} <TagIcons colors={GlobalPalette[palette]} />
+                    {palette} <br />
+                    <TagIconsSettings colors={GlobalPalette[palette]} />
                 </Dropdown.Item>)}
         </DropdownButton>
     </InputGroup>
