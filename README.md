@@ -20,19 +20,26 @@ So instead of logging into Twitter when you have that spare 5minutes, you can ge
 
 ## Definition of done
 
-- Mobile only
-- navbar
-- react router switch
-- Main Page: display randomly selected tasks
-  - Tasks displayed as boxes that fill entire width
-- Setup Page: input the long list of tasks
-  - You can insert, edit or delete task
-  - reorder ???
-- ServerLess functions
-  - Load tasks for specific user
-  - Update existing task
-  - Delete Task
-  - Create new task
-- Only signed in users allowed (obv), they see only their own content
-- use 3 color palettes to chose from in settings
-- use context somehow...
+- Mobile first✅
+- react router switch ✅
+- navbar ✅
+- Main Page: display randomly selected tasks ✅
+  - Tasks displayed as boxes that fill entire width ✅
+- Edit function: see the long list of tasks ✅
+  - You can insert, edit or delete task ✅
+  - reorder ❌
+- ServerLess functions ✅
+  - Load tasks for specific user✅
+  - pdate existing task✅
+  - Delete Task ✅
+  - Create new task ✅
+- Only signed in users allowed (obv), they see only their own content ✅
+- use 3 color palettes to chose from in settings ✅
+- use context somehow... ✅
+- Deploy to netlify ✅
+
+## Demo
+
+<img src = "./YIT Demo.gif">
+
+Try it here: <https://zeitgeist-yit.netlify.app/>
