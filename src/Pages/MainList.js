@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { StyledContainer, StyledTaskBox } from "../Components/MainList/StyledMainList/StyledTaskList";
 import useTaskListData from "../hooks/useTaskListData";
 import { FilterBox } from '../Components/MainList/FilterBox';
-import { HandleEmptyList } from '../Components/HandleEmptyList';
+import { HandleEmptyList } from '../Components/MainList/HandleEmptyList';
 import { EditModal } from '../Components/MainList/EditModal';
 
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { StyledList, StyledLoginButton, StyledNavbarLink } from "./StyledNavbar/StyledHamburgerMenu";
+import { StyledList, StyledListContainer, StyledLoginButton, StyledNavbarLink } from "./StyledNavbar/StyledHamburgerMenu";
 import { LoginButton } from "./LoginButton";
 
 
@@ -26,9 +26,7 @@ export function NavbarLinks({ handleClick }) {
 
             <LoginButton handleClick={handleClick} />
 
-
-
-
         </StyledList>
+
     )
 }

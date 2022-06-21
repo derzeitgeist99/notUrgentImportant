@@ -5,7 +5,9 @@ width: 100%;
 display: grid;
 grid-template-columns: 1fr auto 40px;
 align-items: center;
-background-color: #f7f3ed`
+background-color: #f7f3ed;
+
+`
 
 export const StyledLogo = styled.h1`
 color: black;

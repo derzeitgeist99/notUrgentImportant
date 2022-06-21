@@ -20,6 +20,7 @@ filter: brightness(${props => props.brightness});
 background-color: ${props => props.color};
 box-shadow: ${props => props.shadow};
 text-align: center;
+z-index: -1;
 
 cursor: pointer;
 
