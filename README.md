@@ -23,7 +23,7 @@ So instead of logging into Twitter when you have that spare 5minutes, you can ge
 - Mobile first✅
 - react router switch ✅
 - navbar ✅
-  - Animate
+  - Animate Setting menu appearance ✅
 - Main Page: display randomly selected tasks ✅
   - Tasks displayed as boxes that fill entire width ✅
   - Show loading (when loading) !!
