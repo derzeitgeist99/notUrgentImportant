@@ -22,7 +22,7 @@ export function SetThemeButton() {
     })
 
 
-    return (<InputGroup className="mb-3" style={{ "z-index": "-1" }}>
+    return (<InputGroup className="mb-3" style={{ "z-index": "0" }}>
         <DropdownButton variant="outline-secondary" title="Select" id="segmented-button-dropdown-1">
             {availablePalettes.map((palette, index) =>
                 <Dropdown.Item
