@@ -7,23 +7,21 @@ export const NavbarLinksContainer = styled.div`
 height: 110px;
 width: 100%;
 padding-inline: 10px;
-position: absolute  ;
+
 background-color: #f7f3ed;
-
-
 
 `
 export const NavbarLinksEnterExit = styled.div`
 
- transition: 0.3s;
+ /* transition: 0.2s;
 
 
   transform: 
   //translateY(${({ state }) => (state === "entering" || state === "entered" ? "100%" : "0%")})
-  scaleY(${({ state }) => (state === "exiting" || state === "exited" ? "0" : "100%")})
+ scaleY(${({ state }) => (state === "exiting" || state === "exited" ? "0" : "100%")})
   ;
-  transform-origin: top;
- 
+  transform-origin: top; */
+  
 `
 
 

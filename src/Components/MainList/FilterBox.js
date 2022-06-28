@@ -32,6 +32,7 @@ export function FilterBox({ setFilter, taskListFilter, setIsEdit }) {
 
 
         <StyledFilterContainer>
+
             {availableTags.map((tag) => (
                 <StyledActionPill key={tag}
                     color={colors[tag]}
@@ -60,6 +61,7 @@ export function FilterBox({ setFilter, taskListFilter, setIsEdit }) {
             >
                 New<br /> Task
             </StyledActionPill>
+
         </StyledFilterContainer>
     )
 }

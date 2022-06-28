@@ -9,6 +9,7 @@ display: flex;
 flex-direction: column;
 justify-content: flex-start;
 
+
 `
 export const StyledTaskBox = styled.div`
 margin-bottom: 1rem;

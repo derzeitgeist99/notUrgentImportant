@@ -7,7 +7,6 @@ import { NavbarLinksContainer, NavbarLinksEnterExit } from './StyledNavbar/Style
 
 export default function Navbar() {
     const [menuOpen, setMenuOpen] = useState(false)
-    console.log("menuOpen", menuOpen);
 
     const handleClick = (event) => {
         menuOpen ? setMenuOpen(false) : setMenuOpen(true)
@@ -21,20 +20,11 @@ export default function Navbar() {
 
             </StyledNavbar>
 
-            <Transition in={menuOpen}
-                timeout={500}>
-                {(state) =>
-                    <NavbarLinksEnterExit
-                        state={state}>
-                        {console.log(state)}
+            {menuOpen &&
                         <NavbarLinksContainer>
                             <NavbarLinks handleClick={handleClick} />
-                        </NavbarLinksContainer>
-                    </NavbarLinksEnterExit>
+                </NavbarLinksContainer>
                 }
-
-            </Transition>
-
 
         </>
     )
